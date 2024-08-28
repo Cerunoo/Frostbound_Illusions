@@ -11,11 +11,20 @@ public class HintControl : MonoBehaviour
     public event Action triggerEnter;
     public event Action triggerExit;
 
-    public Image blackoutPressed;
+    public SpriteRenderer blackoutPressed;
     public float fillRatePressed;
     float fillPressed;
 
+    float blackoutPressedStartSize;
+    float hintStartSize;
+
     bool isWork = true;
+
+    void Start()
+    {
+        blackoutPressedStartSize = blackoutPressed.size.x;
+        hintStartSize = anim.transform.localScale.x;
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -57,9 +66,9 @@ public class HintControl : MonoBehaviour
             }
         }
 
-        blackoutPressed.fillAmount = fillPressed / 100;
+        blackoutPressed.size = new Vector2(blackoutPressedStartSize, blackoutPressedStartSize * fillPressed / 100);
         float hintSize = 1 - fillPressed / 650;
-        anim.gameObject.GetComponent<RectTransform>().localScale = new Vector2(hintSize * Mathf.Sign(anim.gameObject.GetComponent<RectTransform>().localScale.x), hintSize);
+        transform.localScale = new Vector2(hintSize * Mathf.Sign(transform.localScale.x), hintSize);
 
         if (fillPressed >= 100 && isWork)
         {
