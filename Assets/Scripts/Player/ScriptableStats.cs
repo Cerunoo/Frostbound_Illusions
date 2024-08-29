@@ -35,8 +35,23 @@ namespace TarodevController
         [Tooltip("The detection distance for grounding and roof detection"), Range(0f, 0.5f)]
         public float GrounderDistance = 0.05f;
 
+        [Header("DASH")] [Tooltip("The immediate velocity applied when dash")]
+        public float DashPower = 20;
+
+        [Tooltip("The animated curve for smooth rolling and changing the speed of the dash over time")]
+        public AnimationCurve DashPowerCurve;
+
+        [Tooltip("Duration of the dash")]
+        public float DashTime = 0.15f;
+
+        [Tooltip("Dash delay time")]
+        public float DashDelay = 0.5f;
+
         [Header("JUMP")] [Tooltip("The immediate velocity applied when jumping")]
         public float JumpPower = 36;
+
+        [Tooltip("The immediate velocity applied when double jumping")]
+        public float DoubleJumpPower = 30;
 
         [Tooltip("The maximum vertical movement speed")]
         public float MaxFallSpeed = 40;

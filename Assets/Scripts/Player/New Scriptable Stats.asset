@@ -18,13 +18,50 @@ MonoBehaviour:
   SnapInput: 1
   VerticalDeadZoneThreshold: 0.3
   HorizontalDeadZoneThreshold: 0.1
-  MaxSpeed: 14
+  MaxSpeed: 12
   Acceleration: 120
   GroundDeceleration: 60
   AirDeceleration: 30
   GroundingForce: -1.5
   GrounderDistance: 0.05
-  JumpPower: 36
+  DashPower: 24
+  DashPowerCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1.2819159
+      outSlope: -1.2819159
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.59955084
+      value: 0.23142625
+      inSlope: -0.8831299
+      outSlope: -0.8831299
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.16088785
+    - serializedVersion: 3
+      time: 1.0000013
+      value: -0.00000021606684
+      inSlope: -0.5779154
+      outSlope: -0.5779154
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DashTime: 0.1
+  DashDelay: 0.65
+  JumpPower: 32
+  DoubleJumpPower: 28
   MaxFallSpeed: 40
   FallAcceleration: 110
   JumpEndEarlyGravityModifier: 3

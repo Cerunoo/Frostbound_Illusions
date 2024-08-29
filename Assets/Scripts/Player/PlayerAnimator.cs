@@ -68,19 +68,19 @@ namespace TarodevController
 
         private void HandleSpriteFlip()
         {
-            if (_player.FrameInput.x != 0) _sprite.flipX = _player.FrameInput.x < 0;
+            if (_player.FrameInput != 0) _sprite.flipX = _player.FrameInput < 0;
         }
 
         private void HandleIdleSpeed()
         {
-            var inputStrength = Mathf.Abs(_player.FrameInput.x);
+            var inputStrength = Mathf.Abs(_player.FrameInput);
             _anim.SetFloat(IdleSpeedKey, Mathf.Lerp(1, _maxIdleSpeed, inputStrength));
             _moveParticles.transform.localScale = Vector3.MoveTowards(_moveParticles.transform.localScale, Vector3.one * inputStrength, 2 * Time.deltaTime);
         }
 
         private void HandleCharacterTilt()
         {
-            var runningTilt = _grounded ? Quaternion.Euler(0, 0, _maxTilt * _player.FrameInput.x) : Quaternion.identity;
+            var runningTilt = _grounded ? Quaternion.Euler(0, 0, _maxTilt * _player.FrameInput) : Quaternion.identity;
             _anim.transform.up = Vector3.RotateTowards(_anim.transform.up, runningTilt * Vector2.up, _tiltSpeed * Time.deltaTime, 0f);
         }
 
