@@ -63,7 +63,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            if (Input.GetKeyDown(KeyCode.Space) && dialogueText.text.Length > 0)
+            if (Input.GetKeyDown(KeyCode.E) && dialogueText.text.Length > 0)
             {
                 dialogueText.text = sentence;
                 break;
