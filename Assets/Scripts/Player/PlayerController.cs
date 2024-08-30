@@ -13,11 +13,12 @@ namespace TarodevController
         private FrameInput _frameInput;
         private Vector2 _frameVelocity;
         private bool _cachedQueryStartInColliders;
-        [SerializeField] private bool facingRight;
+        public bool facingRight;
+        [HideInInspector] public static bool disableMove;
 
-        private InputController controls;
+        [SerializeField] private InputController input;
 
-        public PlayerStamina stamina;
+        [SerializeField] private PlayerStamina stamina;
 
         #region Interface
 
@@ -36,27 +37,17 @@ namespace TarodevController
 
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
 
-            controls = new InputController();
-
-            controls.Move.Jump.performed += context =>
+            input.controls.Player.Jump.performed += context =>
             {
-                _jumpToConsume = true;
-                _frameInput.JumpHeld = true;
-                _timeJumpWasPressed = _time;
+                if (!disableMove)
+                {
+                    _jumpToConsume = true;
+                    _frameInput.JumpHeld = true;
+                    _timeJumpWasPressed = _time;
+                }
             };
-            controls.Move.Jump.canceled += context => _frameInput.JumpHeld = false;
 
-            controls.Move.Dash.performed += context => { if (!isDashing) _dashToConsume = true; };
-        }
-
-        private void OnEnable()
-        {
-            controls.Enable();
-        }
-
-        private void OnDisable()
-        {
-            controls.Disable();
+            input.controls.Player.Dash.performed += context => { if (!disableMove && !isDashing) _dashToConsume = true; };
         }
 
         private void Update()
@@ -69,8 +60,8 @@ namespace TarodevController
         {
             _frameInput = new FrameInput
             {
-                JumpHeld = _frameInput.JumpHeld,
-                Horizontal = controls.Move.Move.ReadValue<float>()
+                JumpHeld = !disableMove ? Convert.ToBoolean(input.controls.Player.Jump.ReadValue<float>()) : false,
+                Horizontal = !disableMove ? input.controls.Player.Horizontal.ReadValue<float>() : 0
             };
 
             if (_stats.SnapInput) _frameInput.Horizontal = Mathf.Abs(_frameInput.Horizontal) < _stats.HorizontalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Horizontal);

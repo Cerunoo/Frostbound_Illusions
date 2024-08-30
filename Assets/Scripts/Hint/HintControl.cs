@@ -1,13 +1,11 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HintControl : MonoBehaviour
 {
-    public KeyCode keycodeEvent;
     public Animator anim;
 
-    public event Action keyPressed;
+    public event Action btnPressed;
     public event Action triggerEnter;
     public event Action triggerExit;
 
@@ -16,14 +14,18 @@ public class HintControl : MonoBehaviour
     float fillPressed;
 
     float blackoutPressedStartSize;
-    float hintStartSize;
 
     bool isWork = true;
 
-    void Start()
+    [SerializeField] private InputController input;
+    private bool btnPress;
+
+    private void Awake()
     {
         blackoutPressedStartSize = blackoutPressed.size.x;
-        hintStartSize = anim.transform.localScale.x;
+
+        input.controls.InteractionBtn.Press.performed += context => btnPress = true;
+        input.controls.InteractionBtn.Press.canceled += context => btnPress = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -41,7 +43,7 @@ public class HintControl : MonoBehaviour
     {
         bool isShow = (anim.GetCurrentAnimatorStateInfo(0).IsName("Show") || anim.GetCurrentAnimatorStateInfo(0).IsName("Hide")) ? (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) ? true : false : false;
 
-        if (other.tag == "Player" && Input.GetKey(keycodeEvent) && isWork && !isShow)
+        if (other.tag == "Player" && btnPress && isWork && !isShow)
         {
             anim.SetBool("pressed", true);
             if (fillPressed + fillRatePressed < 100)
@@ -53,7 +55,7 @@ public class HintControl : MonoBehaviour
                 fillPressed = 100;
             }
         }
-        if (other.tag == "Player" && !Input.GetKey(keycodeEvent) && isWork && !isShow)
+        if (other.tag == "Player" && !btnPress && isWork && !isShow)
         {
             anim.SetBool("pressed", false);
             if (fillPressed - (fillRatePressed * 1.5f) > 0)
@@ -75,7 +77,8 @@ public class HintControl : MonoBehaviour
             anim.SetBool("show", false);
             anim.SetBool("pressed", false);
 
-            keyPressed?.Invoke();
+            btnPress = false;
+            btnPressed?.Invoke();
         }
     }
 

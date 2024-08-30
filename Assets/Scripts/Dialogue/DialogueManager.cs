@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using TarodevController;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -15,24 +17,25 @@ public class DialogueManager : MonoBehaviour
     Queue<string> sentences;
     bool isTyping;
 
-    void Start()
-    {
-        boxAnim = gameObject.GetComponent<Animator>();
+    [SerializeField] private InputController input;
+    private bool btnDown;
 
+    private void Awake()
+    {
+        boxAnim = GetComponent<Animator>();
         sentences = new Queue<string>();
-    }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && !isTyping)
+        input.controls.Dialogue.NextSentence.performed += context =>
         {
-            DisplayNextSentence();
-        }
+            if (!isTyping) DisplayNextSentence();
+            else btnDown = true;
+        };
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
         boxAnim.SetBool("show", true);
+        PlayerController.disableMove = true;
 
         nameText.text = dialogue.name;
         sentences.Clear();
@@ -63,11 +66,13 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            if (Input.GetKeyDown(KeyCode.E) && dialogueText.text.Length > 0)
+            if (btnDown && dialogueText.text.Length > 0 && boxAnim.GetCurrentAnimatorStateInfo(0).IsName("Show") && boxAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
             {
+                btnDown = false;
                 dialogueText.text = sentence;
                 break;
             }
+            else btnDown = false;
 
             dialogueText.text += letter;
             yield return new WaitForSeconds(typeDelay);
@@ -79,5 +84,6 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         boxAnim.SetBool("show", false);
+        PlayerController.disableMove = false;
     }
 }
