@@ -7,7 +7,7 @@ namespace TarodevController
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class PlayerController : MonoBehaviour, IPlayerController
     {
-        [SerializeField] private ScriptableStats _stats;
+        public ScriptableStats _stats;
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
         private FrameInput _frameInput;
@@ -61,10 +61,10 @@ namespace TarodevController
             _frameInput = new FrameInput
             {
                 JumpHeld = !disableMove ? Convert.ToBoolean(input.controls.Player.Jump.ReadValue<float>()) : false,
-                Horizontal = !disableMove ? input.controls.Player.Horizontal.ReadValue<float>() : 0
+                Horizontal = !disableMove ? Mathf.Lerp(_frameInput.Horizontal, input.controls.Player.Horizontal.ReadValue<float>(), Time.deltaTime * 10f) : 0
             };
 
-            if (_stats.SnapInput) _frameInput.Horizontal = Mathf.Abs(_frameInput.Horizontal) < _stats.HorizontalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Horizontal);
+            if (_stats.SnapInput) _frameInput.Horizontal = Mathf.Abs(_frameInput.Horizontal) < _stats.HorizontalDeadZoneThreshold ? 0 : _frameInput.Horizontal;
         }
 
         private void FixedUpdate()

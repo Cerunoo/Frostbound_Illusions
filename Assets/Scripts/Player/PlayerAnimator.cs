@@ -13,7 +13,7 @@ namespace TarodevController
         {
             _anim = GetComponent<Animator>();
 
-            _player = GetComponentInParent<IPlayerController>();
+            _player = GetComponent<IPlayerController>();
         }
 
         private void OnEnable()
@@ -30,15 +30,14 @@ namespace TarodevController
 
         private void Update()
         {
-            if (_player == null) return;
-
-            HandleIdleSpeed();
+            HandleRun();
         }
 
-        private void HandleIdleSpeed()
+        private void HandleRun()
         {
             var inputStrength = Mathf.Abs(_player.FrameInput);
-            _anim.SetFloat(IdleSpeedKey, inputStrength);
+            _anim.SetBool(isRunningKey, inputStrength > 0);
+            _anim.SetFloat("Test", _player.FrameInput);
         }
 
         private void OnJumped()
@@ -55,8 +54,9 @@ namespace TarodevController
             }
         }
 
-        private static readonly int GroundedKey = Animator.StringToHash("Grounded");
-        private static readonly int IdleSpeedKey = Animator.StringToHash("IdleSpeed");
+        
+        private static readonly int isRunningKey = Animator.StringToHash("isRunning");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
+        private static readonly int GroundedKey = Animator.StringToHash("Grounded");
     }
 }
