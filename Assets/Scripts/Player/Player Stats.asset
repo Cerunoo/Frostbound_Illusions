@@ -62,7 +62,7 @@ MonoBehaviour:
   DashDelay: 0.65
   JumpPower: 32
   DoubleJumpPower: 28
-  MaxFallSpeed: 40
+  MaxFallSpeed: 20
   FallAcceleration: 110
   JumpEndEarlyGravityModifier: 3
   CoyoteTime: 0.15

@@ -23,6 +23,7 @@ namespace TarodevController
         #region Interface
 
         public float FrameInput => _frameInput.Horizontal;
+        public float FrameVelocity => _frameVelocity.y;
         public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
 
@@ -58,10 +59,11 @@ namespace TarodevController
 
         private void GatherInput()
         {
+            float inputHorizontal = input.controls.Player.Horizontal.ReadValue<float>();
             _frameInput = new FrameInput
             {
                 JumpHeld = !disableMove ? Convert.ToBoolean(input.controls.Player.Jump.ReadValue<float>()) : false,
-                Horizontal = !disableMove ? Mathf.Lerp(_frameInput.Horizontal, input.controls.Player.Horizontal.ReadValue<float>(), Time.deltaTime * 10f) : 0
+                Horizontal = !disableMove ? inputHorizontal != 0 ? inputHorizontal : Mathf.Lerp(_frameInput.Horizontal, inputHorizontal, Time.fixedDeltaTime * 10f) : 0,
             };
 
             if (_stats.SnapInput) _frameInput.Horizontal = Mathf.Abs(_frameInput.Horizontal) < _stats.HorizontalDeadZoneThreshold ? 0 : _frameInput.Horizontal;
@@ -187,8 +189,8 @@ namespace TarodevController
 
         private void Flip()
         {
-            facingRight = !facingRight;
             transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+            facingRight = !facingRight;
         }
 
         #endregion
@@ -272,5 +274,6 @@ namespace TarodevController
 
         public event Action Jumped;
         public float FrameInput { get; }
+        public float FrameVelocity { get; }
     }
 }
