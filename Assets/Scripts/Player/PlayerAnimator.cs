@@ -6,13 +6,11 @@ namespace TarodevController
     {
         [Header("References")]
         private Animator _anim;
-
         private IPlayerController _player;
 
         private void Awake()
         {
             _anim = GetComponent<Animator>();
-
             _player = GetComponent<IPlayerController>();
         }
 
@@ -47,21 +45,19 @@ namespace TarodevController
 
         private void OnJumped()
         {
-            _anim.SetTrigger(JumpKey);
-            _anim.ResetTrigger(GroundedKey);
+            _anim.SetBool(JumpKey, true);
         }
 
         private void OnGroundedChanged(bool grounded, float impact)
         {
             if (grounded)
             {
-                _anim.SetTrigger(GroundedKey);
+                _anim.SetBool(JumpKey, false);
             }
         }
         
         private static readonly int isRunningKey = Animator.StringToHash("isRunning");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int FallKey = Animator.StringToHash("Fall");
-        private static readonly int GroundedKey = Animator.StringToHash("Grounded");
     }
 }
