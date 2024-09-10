@@ -45,19 +45,21 @@ namespace TarodevController
 
         private void OnJumped()
         {
-            _anim.SetBool(JumpKey, true);
+            _anim.SetTrigger(JumpKey);
+            _anim.ResetTrigger(GroundedKey);
         }
 
         private void OnGroundedChanged(bool grounded, float impact)
         {
             if (grounded)
             {
-                _anim.SetBool(JumpKey, false);
+                _anim.SetTrigger(GroundedKey);
             }
         }
         
         private static readonly int isRunningKey = Animator.StringToHash("isRunning");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int FallKey = Animator.StringToHash("Fall");
+        private static readonly int GroundedKey = Animator.StringToHash("Grounded");
     }
 }
