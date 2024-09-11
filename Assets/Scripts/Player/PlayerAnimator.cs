@@ -28,19 +28,20 @@ namespace TarodevController
 
         private void Update()
         {
-            HandleRun();
+            HandleMove();
             HandleFall();
         }
 
-        private void HandleRun()
+        private void HandleMove()
         {
-            var inputStrength = Mathf.Abs(_player.FrameInput);
-            _anim.SetBool(isRunningKey, inputStrength > 0);
+            var inputStrength = Mathf.Abs(_player.FrameDirection.x);
+            if (_player.IsRunning) _anim.SetBool(isRunningKey, inputStrength > 0);
+            else _anim.SetBool(isWalkingKey, inputStrength > 0);
         }
 
         private void HandleFall()
         {
-            _anim.SetBool(FallKey, _player.FrameVelocity < 0);
+            _anim.SetBool(FallKey, _player.FrameDirection.y < 0);
         }
 
         private void OnJumped()
@@ -56,8 +57,9 @@ namespace TarodevController
                 _anim.SetTrigger(GroundedKey);
             }
         }
-        
+
         private static readonly int isRunningKey = Animator.StringToHash("isRunning");
+        private static readonly int isWalkingKey = Animator.StringToHash("isWalking");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int FallKey = Animator.StringToHash("Fall");
         private static readonly int GroundedKey = Animator.StringToHash("Grounded");

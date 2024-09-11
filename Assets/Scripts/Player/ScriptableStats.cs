@@ -17,8 +17,11 @@ namespace TarodevController
         [Tooltip("Minimum input required before a left or right is recognized. Avoids drifting with sticky controllers"), Range(0.01f, 0.99f)]
         public float HorizontalDeadZoneThreshold = 0.1f;
 
-        [Header("MOVEMENT")] [Tooltip("The top horizontal movement speed")]
-        public float MaxSpeed = 14;
+        [Header("MOVEMENT")] [Tooltip("Maximum running speed")]
+        public float MaxRunSpeed = 14;
+
+        [Tooltip("Maximum walking speed")]
+        public float MaxWalkSpeed = 10;
 
         [Tooltip("The player's capacity to gain horizontal speed")]
         public float Acceleration = 120;

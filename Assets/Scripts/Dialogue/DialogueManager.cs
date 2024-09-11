@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using TarodevController;
 
 public class DialogueManager : MonoBehaviour
@@ -17,6 +16,8 @@ public class DialogueManager : MonoBehaviour
     Queue<string> sentences;
     bool isTyping;
 
+    private PlayerController player;
+
     [SerializeField] private InputController input;
     private bool btnDown;
 
@@ -24,6 +25,8 @@ public class DialogueManager : MonoBehaviour
     {
         boxAnim = GetComponent<Animator>();
         sentences = new Queue<string>();
+
+        player = FindObjectOfType<PlayerController>();
 
         input.controls.Dialogue.NextSentence.performed += context =>
         {
@@ -35,7 +38,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         boxAnim.SetBool("show", true);
-        PlayerController.disableMove = true;
+        player.disableMove = true;
 
         nameText.text = dialogue.name;
         sentences.Clear();
@@ -84,6 +87,6 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         boxAnim.SetBool("show", false);
-        PlayerController.disableMove = false;
+        player.disableMove = false;
     }
 }

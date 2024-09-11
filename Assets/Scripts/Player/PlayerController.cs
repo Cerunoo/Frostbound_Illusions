@@ -7,23 +7,25 @@ namespace TarodevController
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class PlayerController : MonoBehaviour, IPlayerController
     {
-        public ScriptableStats _stats;
+        [SerializeField] private ScriptableStats _stats;
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
         private FrameInput _frameInput;
         private Vector2 _frameVelocity;
         private bool _cachedQueryStartInColliders;
         public bool facingRight;
-        [HideInInspector] public static bool disableMove;
 
         [SerializeField] private InputController input;
+        [HideInInspector] public bool disableMove;
 
         [SerializeField] private PlayerStamina stamina;
 
+        [SerializeField] private bool isRunning;
+
         #region Interface
 
-        public float FrameInput => _frameInput.Horizontal;
-        public float FrameVelocity => _frameVelocity.y;
+        public Vector2 FrameDirection => new Vector2(_frameInput.Horizontal, _frameVelocity.y);
+        public bool IsRunning => isRunning;
         public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
 
@@ -174,7 +176,7 @@ namespace TarodevController
             }
             else
             {
-                _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Horizontal * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
+                _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Horizontal * (isRunning ? _stats.MaxRunSpeed : _stats.MaxWalkSpeed), _stats.Acceleration * Time.fixedDeltaTime);
             }
 
             if (_frameInput.Horizontal > 0 && !facingRight)
@@ -226,7 +228,7 @@ namespace TarodevController
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForSeconds(Time.deltaTime);
             }
-            _frameVelocity.x = _frameInput.Horizontal * _stats.MaxSpeed;
+            _frameVelocity.x = _frameInput.Horizontal * _stats.MaxRunSpeed;
             isDashing = false;
             yield break;
         }
@@ -270,10 +272,10 @@ namespace TarodevController
 
     public interface IPlayerController
     {
-        public event Action<bool, float> GroundedChanged;
+        public Vector2 FrameDirection { get; }
+        public bool IsRunning { get; }
 
+        public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
-        public float FrameInput { get; }
-        public float FrameVelocity { get; }
     }
 }
