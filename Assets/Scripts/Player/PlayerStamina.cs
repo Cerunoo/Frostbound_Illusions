@@ -1,13 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TarodevController;
 
 public class PlayerStamina : MonoBehaviour
 {
     [SerializeField] private Slider staminaSlider;
-    [SerializeField] private int staminaValue = 5;
+    [SerializeField] private ScriptableStats _stats;
+
+    [Header("Only Debug")] [SerializeField] private int staminaValue;
 
     private void Start()
     {
+        staminaSlider.maxValue = _stats.MaxStamina;
+
+        staminaValue = _stats.MaxStamina; // Read Saved Value
         staminaSlider.value = staminaValue;
     }
 

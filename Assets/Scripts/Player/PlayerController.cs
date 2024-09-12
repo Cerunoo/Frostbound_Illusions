@@ -8,19 +8,20 @@ namespace TarodevController
     public class PlayerController : MonoBehaviour, IPlayerController
     {
         [SerializeField] private ScriptableStats _stats;
-        private Rigidbody2D _rb;
-        private CapsuleCollider2D _col;
-        private FrameInput _frameInput;
-        private Vector2 _frameVelocity;
-        private bool _cachedQueryStartInColliders;
-        public bool facingRight;
-
-        [SerializeField] private InputController input;
-        [HideInInspector] public bool disableMove;
-
         [SerializeField] private PlayerStamina stamina;
 
+        private Rigidbody2D _rb;
+        private CapsuleCollider2D _col;
+
+        private FrameInput _frameInput;
+        [SerializeField] private InputController input;
+
+        [HideInInspector] public bool disableMove;
+        public bool facingRight;
         [SerializeField] private bool isRunning;
+
+        private Vector2 _frameVelocity;
+        private bool _cachedQueryStartInColliders;
 
         #region Interface
 

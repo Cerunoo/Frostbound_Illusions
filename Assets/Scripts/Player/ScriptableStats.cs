@@ -70,5 +70,8 @@ namespace TarodevController
 
         [Tooltip("The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
         public float JumpBuffer = .2f;
+
+        [Header("STAMINA")] [Tooltip("The maximum value of the player stamina")]
+        public int MaxStamina = 5;
     }
 }

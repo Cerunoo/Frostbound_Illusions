@@ -1889,7 +1889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staminaSlider: {fileID: 637982752}
-  staminaValue: 5
+  _stats: {fileID: 11400000, guid: 06d44d479e78f824baf7f057475eb400, type: 2}
 --- !u!1 &1396280349
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,9 +2785,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 06d44d479e78f824baf7f057475eb400, type: 2}
-  facingRight: 0
-  input: {fileID: 478275130}
   stamina: {fileID: 1227240521}
+  input: {fileID: 478275130}
+  disableMove: 0
+  facingRight: 0
+  isRunning: 0
 --- !u!114 &1910010692
 MonoBehaviour:
   m_ObjectHideFlags: 0
