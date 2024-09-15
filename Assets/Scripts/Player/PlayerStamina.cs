@@ -7,13 +7,13 @@ public class PlayerStamina : MonoBehaviour
     [SerializeField] private Slider staminaSlider;
     [SerializeField] private ScriptableStats _stats;
 
-    [Header("Only Debug")] [SerializeField] private int staminaValue;
+    [Header("Debug"), SerializeField] private int staminaValue;
 
     private void Start()
     {
         staminaSlider.maxValue = _stats.MaxStamina;
 
-        staminaValue = _stats.MaxStamina; // Read Saved Value
+        staminaValue = _stats.MaxStamina; // Read saved value
         staminaSlider.value = staminaValue;
     }
 

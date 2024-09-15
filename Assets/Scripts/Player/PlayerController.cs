@@ -10,15 +10,16 @@ namespace TarodevController
         [SerializeField] private ScriptableStats _stats;
         [SerializeField] private PlayerStamina stamina;
 
+        [SerializeField] private InputController input;
+        private FrameInput _frameInput;
+
+        [Header("Debug")]
+        public bool disableMove;
+        [SerializeField] private bool isRunning; // Пока непонятно откуда будет изменяться
+        public bool facingRight;
+
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
-
-        private FrameInput _frameInput;
-        [SerializeField] private InputController input;
-
-        [HideInInspector] public bool disableMove;
-        public bool facingRight;
-        [SerializeField] private bool isRunning;
 
         private Vector2 _frameVelocity;
         private bool _cachedQueryStartInColliders;
@@ -50,7 +51,6 @@ namespace TarodevController
                     _timeJumpWasPressed = _time;
                 }
             };
-
             input.controls.Player.Dash.performed += context => { if (!disableMove && !isDashing) _dashToConsume = true; };
         }
 
@@ -123,7 +123,6 @@ namespace TarodevController
         }
 
         #endregion
-
 
         #region Jumping
 
@@ -256,13 +255,6 @@ namespace TarodevController
         #endregion
 
         private void ApplyMovement() => _rb.velocity = _frameVelocity;
-
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (_stats == null) Debug.LogWarning("Please assign a ScriptableStats asset to the Player Controller's Stats slot", this);
-        }
-#endif
     }
 
     public struct FrameInput
