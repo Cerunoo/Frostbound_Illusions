@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TarodevController;
+using FollusionController;
 
 public class PlayerStamina : MonoBehaviour
 {

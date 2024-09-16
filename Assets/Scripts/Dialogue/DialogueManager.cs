@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using TarodevController;
+using FollusionController;
 
 public class DialogueManager : MonoBehaviour
 {

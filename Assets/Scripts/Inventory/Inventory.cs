@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using TarodevController;
+using FollusionController;
 
 public class Inventory : MonoBehaviour
 {

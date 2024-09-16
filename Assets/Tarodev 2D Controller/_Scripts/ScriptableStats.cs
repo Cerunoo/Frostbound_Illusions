@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FollusionController
+namespace TarodevvvvController
 {
     [CreateAssetMenu]
     public class ScriptableStats : ScriptableObject
@@ -17,11 +17,8 @@ namespace FollusionController
         [Tooltip("Minimum input required before a left or right is recognized. Avoids drifting with sticky controllers"), Range(0.01f, 0.99f)]
         public float HorizontalDeadZoneThreshold = 0.1f;
 
-        [Header("MOVEMENT")] [Tooltip("Maximum running speed")]
-        public float MaxRunSpeed = 14;
-
-        [Tooltip("Maximum walking speed")]
-        public float MaxWalkSpeed = 10;
+        [Header("MOVEMENT")] [Tooltip("The top horizontal movement speed")]
+        public float MaxSpeed = 14;
 
         [Tooltip("The player's capacity to gain horizontal speed")]
         public float Acceleration = 120;
@@ -38,23 +35,8 @@ namespace FollusionController
         [Tooltip("The detection distance for grounding and roof detection"), Range(0f, 0.5f)]
         public float GrounderDistance = 0.05f;
 
-        [Header("DASH")] [Tooltip("The immediate velocity applied when dash")]
-        public float DashPower = 20;
-
-        [Tooltip("The animated curve for smooth rolling and changing the speed of the dash over time")]
-        public AnimationCurve DashPowerCurve;
-
-        [Tooltip("Duration of the dash")]
-        public float DashTime = 0.15f;
-
-        [Tooltip("Dash delay time")]
-        public float DashDelay = 0.5f;
-
         [Header("JUMP")] [Tooltip("The immediate velocity applied when jumping")]
         public float JumpPower = 36;
-
-        [Tooltip("The immediate velocity applied when double jumping")]
-        public float DoubleJumpPower = 30;
 
         [Tooltip("The maximum vertical movement speed")]
         public float MaxFallSpeed = 40;
@@ -70,8 +52,5 @@ namespace FollusionController
 
         [Tooltip("The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
         public float JumpBuffer = .2f;
-
-        [Header("STAMINA")] [Tooltip("The maximum value of the player stamina")]
-        public int MaxStamina = 5;
     }
 }
