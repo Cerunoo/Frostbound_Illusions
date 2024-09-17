@@ -9,10 +9,12 @@ namespace FollusionController
         [SerializeField] private float _tiltSpeed = 20;
         [SerializeField] private LayerMask DetectGroundLayer;
 
-        [Header("Particles")][SerializeField] private ParticleSystem _jumpParticles;
+        [Header("Particles")]
+        [SerializeField] private ParticleSystem _jumpParticles;
         [SerializeField] private ParticleSystem _launchParticles;
         [SerializeField] private ParticleSystem _moveParticles;
         [SerializeField] private ParticleSystem _landParticles;
+        [SerializeField] private ParticleSystem _doubleJumpParticles;
 
         // [Header("Audio Clips"), SerializeField]
         // private AudioClip[] _footsteps;
@@ -44,8 +46,6 @@ namespace FollusionController
 
         private void Update()
         {
-            if (_player == null) return;
-
             DetectGroundColor();
             HandleMove();
             HandleCharacterTilt();
@@ -71,7 +71,7 @@ namespace FollusionController
             _anim.SetBool(FallKey, _player.FrameDirection.y < 0);
         }
 
-        private void OnJumped()
+        private void OnJumped(bool doubleJump)
         {
             _anim.SetTrigger(JumpKey);
             _anim.ResetTrigger(GroundedKey);
@@ -81,6 +81,11 @@ namespace FollusionController
                 SetColor(_jumpParticles);
                 SetColor(_launchParticles);
                 _jumpParticles.Play();
+            }
+            if (doubleJump)
+            {
+                SetColor(_doubleJumpParticles);
+                _doubleJumpParticles.Play();
             }
         }
 

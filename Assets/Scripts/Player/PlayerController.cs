@@ -29,7 +29,7 @@ namespace FollusionController
         public Vector2 FrameDirection => new Vector2(_frameInput.Horizontal, _frameVelocity.y);
         public bool IsRunning => isRunning;
         public event Action<bool, float> GroundedChanged;
-        public event Action Jumped;
+        public event Action<bool> Jumped;
 
         #endregion
 
@@ -160,7 +160,7 @@ namespace FollusionController
             _bufferedJumpUsable = false;
             _coyoteUsable = false;
             _frameVelocity.y = (!doubleJump) ? _stats.JumpPower : _stats.DoubleJumpPower;
-            Jumped?.Invoke();
+            Jumped?.Invoke(doubleJump);
         }
 
         #endregion
@@ -269,6 +269,6 @@ namespace FollusionController
         public bool IsRunning { get; }
 
         public event Action<bool, float> GroundedChanged;
-        public event Action Jumped;
+        public event Action<bool> Jumped;
     }
 }
