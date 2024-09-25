@@ -29,6 +29,7 @@ namespace FollusionController
         public bool IsRunning => isRunning;
         public event Action<bool, float> GroundedChanged;
         public event Action<bool> Jumped;
+        public event Action Dashed;
 
         #endregion
 
@@ -220,6 +221,7 @@ namespace FollusionController
             dashDelay = _stats.DashDelay;
             isDashing = true;
             canNewDash = false;
+            Dashed?.Invoke();
 
             float elapsedTime = 0f;
             while (elapsedTime < _stats.DashTime)
@@ -230,7 +232,7 @@ namespace FollusionController
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForSeconds(Time.deltaTime);
             }
-            _frameVelocity.x = _frameInput.Horizontal * _stats.MaxRunSpeed;
+            _frameVelocity.x = _frameInput.Horizontal * (isRunning ? _stats.MaxRunSpeed : _stats.MaxWalkSpeed);
             isDashing = false;
             yield break;
         }
@@ -272,5 +274,6 @@ namespace FollusionController
 
         public event Action<bool, float> GroundedChanged;
         public event Action<bool> Jumped;
+        public event Action Dashed;
     }
 }

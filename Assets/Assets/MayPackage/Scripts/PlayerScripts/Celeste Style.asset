@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9964edb8a5faff042812b1479fb3e748, type: 3}
+  m_Name: Celeste Style
+  m_EditorClassIdentifier: 
+  gravityStrength: -15.555554
+  gravityScale: 1.5856833
+  fallGravityMult: 1.5
+  maxFallSpeed: 5
+  fastFallGravityMult: 1.5
+  maxFastFallSpeed: -50
+  runMaxSpeed: 8
+  runAcceleration: 2.5
+  runAccelAmount: 15.625
+  runDecceleration: 5
+  runDeccelAmount: 31.25
+  accelInAir: 0.65
+  deccelInAir: 0.65
+  doConserveMomentum: 1
+  jumpHeight: 2.8
+  jumpTimeToApex: 0.6
+  jumpForce: 9.333333
+  jumpCutGravityMult: 0
+  jumpHangGravityMult: 0
+  jumpHangTimeThreshold: 0
+  jumpHangAccelerationMult: 0
+  jumpHangMaxSpeedMult: 0
+  wallJumpForce: {x: 15, y: 25}
+  wallJumpRunLerp: 0.5
+  wallJumpTime: 0.15
+  doTurnOnWallJump: 0
+  slideSpeed: 0
+  slideAccel: 0
+  coyoteTime: 0.1
+  jumpInputBufferTime: 0.1

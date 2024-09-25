@@ -36,12 +36,14 @@ namespace FollusionController
         {
             _player.Jumped += OnJumped;
             _player.GroundedChanged += OnGroundedChanged;
+            _player.Dashed += OnDashed;
         }
 
         private void OnDisable()
         {
             _player.Jumped -= OnJumped;
             _player.GroundedChanged -= OnGroundedChanged;
+            _player.Dashed -= OnDashed;
         }
 
         private void Update()
@@ -89,6 +91,11 @@ namespace FollusionController
             }
         }
 
+        private void OnDashed()
+        {
+            _anim.SetTrigger(DashKey);
+        }
+
         private void OnGroundedChanged(bool grounded, float impact)
         {
             _grounded = grounded;
@@ -132,5 +139,6 @@ namespace FollusionController
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int FallKey = Animator.StringToHash("Fall");
         private static readonly int GroundedKey = Animator.StringToHash("Grounded");
+        private static readonly int DashKey = Animator.StringToHash("Dash");
     }
 }
