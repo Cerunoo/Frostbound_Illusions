@@ -10,13 +10,12 @@ namespace FollusionController
         [SerializeField] private ScriptableStats _stats;
         [SerializeField] private PlayerStamina stamina;
 
-        [SerializeField] private InputController input;
-        private FrameInput _frameInput;
-
         [Header("Debug")]
         public bool disableMove;
         [SerializeField] private bool isRunning; // Пока непонятно откуда будет изменяться
         public bool facingRight;
+
+        private FrameInput _frameInput;
 
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
@@ -42,16 +41,19 @@ namespace FollusionController
 
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
 
-            input.controls.Player.Jump.performed += context =>
+            if (InputController.Instance != null)
             {
-                if (!disableMove)
+                InputController.Instance.controls.Player.Jump.performed += context =>
                 {
-                    _jumpToConsume = true;
-                    _frameInput.JumpHeld = true;
-                    _timeJumpWasPressed = _time;
-                }
-            };
-            input.controls.Player.Dash.performed += context => { if (!disableMove && !isDashing) _dashToConsume = true; };
+                    if (!disableMove)
+                    {
+                        _jumpToConsume = true;
+                        _frameInput.JumpHeld = true;
+                        _timeJumpWasPressed = _time;
+                    }
+                };
+                InputController.Instance.controls.Player.Dash.performed += context => { if (!disableMove && !isDashing) _dashToConsume = true; };
+            }
         }
 
         private void Update()
@@ -62,10 +64,10 @@ namespace FollusionController
 
         private void GatherInput()
         {
-            float inputHorizontal = input.controls.Player.Horizontal.ReadValue<float>();
+            float inputHorizontal = InputController.Instance ? InputController.Instance.controls.Player.Horizontal.ReadValue<float>() : 0;
             _frameInput = new FrameInput
             {
-                JumpHeld = !disableMove ? Convert.ToBoolean(input.controls.Player.Jump.ReadValue<float>()) : false,
+                JumpHeld = !disableMove ? Convert.ToBoolean(InputController.Instance ? InputController.Instance.controls.Player.Jump.ReadValue<float>() : 0) : false,
                 Horizontal = !disableMove ? inputHorizontal != 0 ? inputHorizontal : Mathf.Lerp(_frameInput.Horizontal, inputHorizontal, Time.fixedDeltaTime * 10f) : 0,
             };
 
@@ -95,8 +97,8 @@ namespace FollusionController
 
             // Ground and Ceiling
             Vector2 playerScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-            bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size * playerScale, _col.direction, 0, Vector2.down, _stats.GrounderDistance, ~_stats.PlayerLayer);
-            bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size * playerScale, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.PlayerLayer);
+            bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size * playerScale, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.GroundLayer);
+            bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size * playerScale, _col.direction, 0, Vector2.up, _stats.GrounderDistance, _stats.GroundLayer);
 
             // Hit a Ceiling
             if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);

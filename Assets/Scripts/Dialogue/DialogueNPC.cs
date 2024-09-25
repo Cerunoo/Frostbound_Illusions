@@ -3,22 +3,22 @@ using UnityEngine;
 public class DialogueNPC : MonoBehaviour
 {
     [SerializeField] private DialogueManager dm;
-    [SerializeField] private HintControl hint;
+    [SerializeField] private InteractionButton button;
     [SerializeField] private Dialogue dialogue;
 
-    void OnEnable()
+    private void OnEnable()
     {
-        hint.btnPressed += TriggerDialogue;
-        hint.triggerExit += dm.EndDialogue;
+        button.btnPress += TriggerDialogue;
+        button.btnExit += dm.EndDialogue;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        hint.btnPressed -= TriggerDialogue;
-        hint.triggerExit -= dm.EndDialogue;
+        button.btnPress -= TriggerDialogue;
+        button.btnExit -= dm.EndDialogue;
     }
 
-    void TriggerDialogue()
+    private void TriggerDialogue()
     {
         dm.StartDialogue(dialogue);
     }

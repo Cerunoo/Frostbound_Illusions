@@ -279,7 +279,7 @@
             ]
         },
         {
-            "name": "InteractionBtn",
+            "name": "InteractionButton",
             "id": "2d1460d0-9e22-49ad-8507-d0b2b682eb1c",
             "actions": [
                 {

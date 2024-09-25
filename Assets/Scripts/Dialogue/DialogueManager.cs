@@ -18,7 +18,6 @@ public class DialogueManager : MonoBehaviour
 
     private PlayerController player;
 
-    [SerializeField] private InputController input;
     private bool btnDown;
 
     private void Awake()
@@ -28,11 +27,14 @@ public class DialogueManager : MonoBehaviour
 
         player = FindObjectOfType<PlayerController>();
 
-        input.controls.Dialogue.NextSentence.performed += context =>
+        if (InputController.Instance != null)
         {
-            if (!isTyping) DisplayNextSentence();
-            else btnDown = true;
-        };
+            InputController.Instance.controls.Dialogue.NextSentence.performed += context =>
+            {
+                if (!isTyping) DisplayNextSentence();
+                else btnDown = true;
+            };
+        }
     }
 
     public void StartDialogue(Dialogue dialogue)

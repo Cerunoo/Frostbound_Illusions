@@ -301,7 +301,7 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""InteractionBtn"",
+            ""name"": ""InteractionButton"",
             ""id"": ""2d1460d0-9e22-49ad-8507-d0b2b682eb1c"",
             ""actions"": [
                 {
@@ -415,9 +415,9 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
         m_Inventory_SelectLeft = m_Inventory.FindAction("SelectLeft", throwIfNotFound: true);
         m_Inventory_SelectRight = m_Inventory.FindAction("SelectRight", throwIfNotFound: true);
         m_Inventory_DropItem = m_Inventory.FindAction("DropItem", throwIfNotFound: true);
-        // InteractionBtn
-        m_InteractionBtn = asset.FindActionMap("InteractionBtn", throwIfNotFound: true);
-        m_InteractionBtn_Press = m_InteractionBtn.FindAction("Press", throwIfNotFound: true);
+        // InteractionButton
+        m_InteractionButton = asset.FindActionMap("InteractionButton", throwIfNotFound: true);
+        m_InteractionButton_Press = m_InteractionButton.FindAction("Press", throwIfNotFound: true);
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_NextSentence = m_Dialogue.FindAction("NextSentence", throwIfNotFound: true);
@@ -611,51 +611,51 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
     }
     public InventoryActions @Inventory => new InventoryActions(this);
 
-    // InteractionBtn
-    private readonly InputActionMap m_InteractionBtn;
-    private List<IInteractionBtnActions> m_InteractionBtnActionsCallbackInterfaces = new List<IInteractionBtnActions>();
-    private readonly InputAction m_InteractionBtn_Press;
-    public struct InteractionBtnActions
+    // InteractionButton
+    private readonly InputActionMap m_InteractionButton;
+    private List<IInteractionButtonActions> m_InteractionButtonActionsCallbackInterfaces = new List<IInteractionButtonActions>();
+    private readonly InputAction m_InteractionButton_Press;
+    public struct InteractionButtonActions
     {
         private @InputSettings m_Wrapper;
-        public InteractionBtnActions(@InputSettings wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Press => m_Wrapper.m_InteractionBtn_Press;
-        public InputActionMap Get() { return m_Wrapper.m_InteractionBtn; }
+        public InteractionButtonActions(@InputSettings wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Press => m_Wrapper.m_InteractionButton_Press;
+        public InputActionMap Get() { return m_Wrapper.m_InteractionButton; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InteractionBtnActions set) { return set.Get(); }
-        public void AddCallbacks(IInteractionBtnActions instance)
+        public static implicit operator InputActionMap(InteractionButtonActions set) { return set.Get(); }
+        public void AddCallbacks(IInteractionButtonActions instance)
         {
-            if (instance == null || m_Wrapper.m_InteractionBtnActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_InteractionBtnActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_InteractionButtonActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InteractionButtonActionsCallbackInterfaces.Add(instance);
             @Press.started += instance.OnPress;
             @Press.performed += instance.OnPress;
             @Press.canceled += instance.OnPress;
         }
 
-        private void UnregisterCallbacks(IInteractionBtnActions instance)
+        private void UnregisterCallbacks(IInteractionButtonActions instance)
         {
             @Press.started -= instance.OnPress;
             @Press.performed -= instance.OnPress;
             @Press.canceled -= instance.OnPress;
         }
 
-        public void RemoveCallbacks(IInteractionBtnActions instance)
+        public void RemoveCallbacks(IInteractionButtonActions instance)
         {
-            if (m_Wrapper.m_InteractionBtnActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_InteractionButtonActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IInteractionBtnActions instance)
+        public void SetCallbacks(IInteractionButtonActions instance)
         {
-            foreach (var item in m_Wrapper.m_InteractionBtnActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_InteractionButtonActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_InteractionBtnActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_InteractionButtonActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public InteractionBtnActions @InteractionBtn => new InteractionBtnActions(this);
+    public InteractionButtonActions @InteractionButton => new InteractionButtonActions(this);
 
     // Dialogue
     private readonly InputActionMap m_Dialogue;
@@ -733,7 +733,7 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
         void OnSelectRight(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
     }
-    public interface IInteractionBtnActions
+    public interface IInteractionButtonActions
     {
         void OnPress(InputAction.CallbackContext context);
     }
