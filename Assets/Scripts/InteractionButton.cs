@@ -3,11 +3,25 @@ using UnityEngine;
 
 public class InteractionButton : MonoBehaviour
 {
-    public event Action btnPress;
+    public Action _btnPress;
+    public event Action btnPress
+    {
+        add
+        {
+            _btnPress += value;
+            IsDisable = false;
+        }
+        remove
+        {
+            _btnPress -= value;
+            if (_btnPress == null) IsDisable = true;
+        }
+    }
     public event Action btnExit;
     private bool inTrigger;
+    public bool pressed;
 
-    private Animator anim;
+    [SerializeField] private Animator anim;
 
     private bool isDisable = false;
     public bool IsDisable
@@ -15,7 +29,7 @@ public class InteractionButton : MonoBehaviour
         get => isDisable;
         set
         {
-            isDisable = !isDisable;
+            isDisable = value;
             if (isDisable == true)
             {
                 anim.SetBool("Show", false);
@@ -26,18 +40,17 @@ public class InteractionButton : MonoBehaviour
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
-
         if (InputController.Instance != null)
         {
             InputController.Instance.controls.InteractionButton.Press.performed += context =>
             {
-                if (inTrigger && !IsDisable)
+                if (inTrigger && !IsDisable && !pressed)
                 {
                     anim.SetBool("Show", false);
                     anim.SetBool("Pressed", true);
 
-                    btnPress?.Invoke();
+                    pressed = true;
+                    _btnPress?.Invoke();
                 }
             };
         }

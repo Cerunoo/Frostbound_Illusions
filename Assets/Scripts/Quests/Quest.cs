@@ -1,53 +1,52 @@
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Quest
+public class Quest : MonoBehaviour
 {
-    public static event Action<Quest> QuestPassedEvent;
-    public static event Action<Quest> QuestGotEvent;
+    [SerializeField] protected DisableWallNPC disableWallNPC;
+    protected enum DisableWallNPC { None, AfterGot, AfterPass }
 
-    public string QuestName { get; protected set; }
-    public string QuestDescription { get; protected set; }
+    [SerializeField] protected Dialogue passDialogue;
+    [SerializeField] protected Dialogue failDialogue;
 
-    public virtual void Pass() => QuestPassedEvent?.Invoke(this);
-    public virtual void Got() => QuestGotEvent?.Invoke(this);
-    public virtual void Start() { }
-    public virtual void Destroy() { }
+    protected DialogueNPC npc;
+    protected bool questGot;
 
-    public Quest(string parametrs)
+    public event Action<Quest> QuestGotEvent;
+    public event Action<Quest> QuestPassedEvent;
+
+    protected virtual void Got()
     {
-        // List<string> parList;
-        string json = @"{
-            ""name"": ""QuestName"",
-            ""description"": ""QuestDesc""
-        }";
-        QuestList questList = JsonUtility.FromJson<QuestList>(json);
-        Debug.Log(JsonUtility.FromJson<QuestList>(json));
-        Debug.Log(questList.name);
-        Debug.Log(questList.description);
-
-        // foreach (Quest quest in questList.Quests)
-        // List<string> parList = parametrs.GetWords();
-        // List<string> parList = 
-        // parametrs = JsonUtility.FromJson<Quest>(parametrs);
-
-        // var nameIndex = parList.FindIndex(s => s == "name");
-        // var descIndex = parList.FindIndex(s => s == "description");
-
-        // QuestName = "";
-        // for (int i = nameIndex + 1; i < descIndex; i++)
-        //     QuestName += parList[i] + " ";
-
-        // QuestDescription = "";
-        // for (int i = descIndex + 1; i < parList.Count; i++)
-        //     QuestDescription += parList[i] + " ";
+        if (questGot) return;
+        questGot = true;
+        QuestGotEvent?.Invoke(this);
+        if (disableWallNPC == DisableWallNPC.AfterGot) GetComponent<Collider2D>().enabled = false;
+        npc.button.btnPress += TriggerDialogue;
     }
-}
+    protected virtual void Pass()
+    {
+        QuestPassedEvent?.Invoke(this);
+        if (disableWallNPC == DisableWallNPC.AfterPass) GetComponent<Collider2D>().enabled = false;
+        npc.button.btnPress -= TriggerDialogue;
+    }
+    protected virtual void TriggerDialogue()
+    {
+        bool passQuest = CheckQuest();
+        npc.dm.StartDialogue(passQuest ? passDialogue : failDialogue, npc);
+        if (passQuest) Pass();
+    }
+    protected virtual bool CheckQuest() => true;
 
-[Serializable]
-public class QuestList
-{
-    public string name;
-    public string description;
+    protected virtual void OnEnable()
+    {
+        npc = GetComponent<DialogueNPC>();
+        npc.DialogueOver += Got;
+    }
+    protected virtual void OnDisable()
+    {
+        npc.DialogueOver -= Got;
+        if (npc.button._btnPress != null && npc.button._btnPress.GetInvocationList().Any(d => d.Method.Name == "TriggerDialogue")) // Пздц
+            npc.button.btnPress -= TriggerDialogue;
+    }
 }

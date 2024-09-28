@@ -7,17 +7,16 @@ public class DialogueManager : MonoBehaviour
 {
     public Text dialogueText;
     public Text nameText;
-
     public float typeDelay;
 
-    Animator boxAnim;
-
     Queue<string> sentences;
-    bool isTyping;
+    private bool isTyping;
+    private bool btnDown;
 
+    private Animator boxAnim;
     private PlayerController player;
 
-    private bool btnDown;
+    private DialogueNPC currentNPC;
 
     private void Awake()
     {
@@ -36,8 +35,10 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue, DialogueNPC npc)
     {
+        currentNPC = npc;
+
         boxAnim.SetBool("show", true);
         player.disableMove = true;
 
@@ -55,6 +56,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (sentences.Count == 0)
         {
+            currentNPC?.TriggerDialogueOver();
             EndDialogue();
             return;
         }
@@ -87,6 +89,9 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        if (currentNPC != null) currentNPC.button.pressed = false;
+        currentNPC = null;
+
         boxAnim.SetBool("show", false);
         player.disableMove = false;
     }

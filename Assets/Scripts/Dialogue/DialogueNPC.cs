@@ -1,25 +1,28 @@
+using System;
 using UnityEngine;
 
 public class DialogueNPC : MonoBehaviour
 {
-    [SerializeField] private DialogueManager dm;
-    [SerializeField] private InteractionButton button;
+    public DialogueManager dm;
+    public InteractionButton button;
     [SerializeField] private Dialogue dialogue;
+
+    public void TriggerDialogueOver()
+    {
+        OnDisable();
+        DialogueOver?.Invoke();
+    }
+    public event Action DialogueOver;
 
     private void OnEnable()
     {
         button.btnPress += TriggerDialogue;
-        button.btnExit += dm.EndDialogue;
     }
 
     private void OnDisable()
     {
         button.btnPress -= TriggerDialogue;
-        button.btnExit -= dm.EndDialogue;
     }
 
-    private void TriggerDialogue()
-    {
-        dm.StartDialogue(dialogue);
-    }
+    private void TriggerDialogue() => dm.StartDialogue(dialogue, this);
 }

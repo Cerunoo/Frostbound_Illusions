@@ -29,54 +29,61 @@ public class Inventory : MonoBehaviour
         {
             InputController.Instance.controls.Inventory.SwitchOpen.performed += context => { if (!animIsOn && isWork) SwitchInventory(); };
 
-            InputController.Instance.controls.Inventory.SelectLeft.performed += context =>
-            {
-                if (isOpen && !animIsOn && isWork)
-                {
-                    slots[selectedSlot].GetComponent<Image>().color = normalColor;
-                    if (selectedSlot != 0)
-                    {
-                        selectedSlot--;
-                    }
-                    else
-                    {
-                        selectedSlot = slots.Length - 1;
-                    }
-                    slots[selectedSlot].GetComponent<Image>().color = selectedColor;
-                }
-            };
-            InputController.Instance.controls.Inventory.SelectRight.performed += context =>
-            {
-                if (isOpen && !animIsOn && isWork)
-                {
-                    slots[selectedSlot].GetComponent<Image>().color = normalColor;
-                    if (selectedSlot != slots.Length - 1)
-                    {
-                        selectedSlot++;
-                    }
-                    else
-                    {
-                        selectedSlot = 0;
-                    }
-                    slots[selectedSlot].GetComponent<Image>().color = selectedColor;
-                }
-            };
+            InputController.Instance.controls.Inventory.SelectLeft.performed += context => SelectLeft();
+            InputController.Instance.controls.Inventory.SelectRight.performed += context => SelectRight();
 
-            InputController.Instance.controls.Inventory.DropItem.performed += context =>
+            InputController.Instance.controls.Inventory.DropItem.performed += context => DropItem();
+        }
+    }
+
+    private void SelectLeft()
+    {
+        if (isOpen && !animIsOn && isWork)
+        {
+            slots[selectedSlot].GetComponent<Image>().color = normalColor;
+            if (selectedSlot != 0)
             {
-                if (isOpen && !animIsOn && isWork)
-                {
-                    if (!isFull[selectedSlot]) return;
-                    isFull[selectedSlot] = false;
+                selectedSlot--;
+            }
+            else
+            {
+                selectedSlot = slots.Length - 1;
+            }
+            slots[selectedSlot].GetComponent<Image>().color = selectedColor;
+        }
+    }
+    private void SelectRight()
+    {
+        if (isOpen && !animIsOn && isWork)
+        {
+            slots[selectedSlot].GetComponent<Image>().color = normalColor;
+            if (selectedSlot != slots.Length - 1)
+            {
+                selectedSlot++;
+            }
+            else
+            {
+                selectedSlot = 0;
+            }
+            slots[selectedSlot].GetComponent<Image>().color = selectedColor;
+        }
+    }
 
-                    Image slotImg = slots[selectedSlot].transform.GetChild(0).GetComponent<Image>();
-                    slotImg.gameObject.SetActive(false);
+    public void DropItem(bool forciblyRemove = false, int indexSlot = 4)
+    {
+        if ((isOpen && !animIsOn && isWork) || forciblyRemove)
+        {
+            int slot = !forciblyRemove ? selectedSlot : indexSlot;
 
-                    Vector2 spawnPos = new Vector2(player.transform.position.x + spawnDistance.x * (player.facingRight ? 1 : -1), player.transform.position.y + spawnDistance.y);
-                    Instantiate(slotItems[selectedSlot], spawnPos, Quaternion.identity);
-                    slotItems[selectedSlot] = null;
-                }
-            };
+            if (!isFull[slot]) return;
+            isFull[slot] = false;
+
+            Image slotImg = slots[slot].transform.GetChild(0).GetComponent<Image>();
+            slotImg.gameObject.SetActive(false);
+
+            Vector2 spawnPos = new Vector2(player.transform.position.x + spawnDistance.x * (player.facingRight ? 1 : -1), player.transform.position.y + spawnDistance.y);
+            Instantiate(slotItems[slot], spawnPos, Quaternion.identity);
+            slotItems[slot] = null;
         }
     }
 
