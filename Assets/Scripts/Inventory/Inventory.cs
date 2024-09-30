@@ -81,8 +81,11 @@ public class Inventory : MonoBehaviour
             Image slotImg = slots[slot].transform.GetChild(0).GetComponent<Image>();
             slotImg.gameObject.SetActive(false);
 
-            Vector2 spawnPos = new Vector2(player.transform.position.x + spawnDistance.x * (player.facingRight ? 1 : -1), player.transform.position.y + spawnDistance.y);
-            Instantiate(slotItems[slot], spawnPos, Quaternion.identity);
+            if (!forciblyRemove)
+            {
+                Vector2 spawnPos = new Vector2(player.transform.position.x + spawnDistance.x * (player.facingRight ? 1 : -1), player.transform.position.y + spawnDistance.y);
+                if (!forciblyRemove) Instantiate(slotItems[slot], spawnPos, Quaternion.identity);
+            }
             slotItems[slot] = null;
         }
     }

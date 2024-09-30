@@ -12923,6 +12923,7 @@ MonoBehaviour:
     name: Verrden
     sentences:
     - We need five logs.
+  inventory: {fileID: 1967925677}
   desiredObjects:
   - {fileID: 9078408977448292005, guid: a131ae57bcd6f7f49978620ca305ed78, type: 3}
   - {fileID: 9078408977448292005, guid: a131ae57bcd6f7f49978620ca305ed78, type: 3}
@@ -38933,6 +38934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424c3363658c8774daf3e3eced79ec8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pressed: 0
   anim: {fileID: 2558148062423190875}
 --- !u!95 &2558148062423190875
 Animator:
