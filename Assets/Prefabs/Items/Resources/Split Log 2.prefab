@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6535947131031927540
+--- !u!1 &7790666290606112602
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6535947131031927542}
-  - component: {fileID: 6535947131031927537}
-  - component: {fileID: 6535947131031927541}
-  - component: {fileID: 6535947131031927536}
-  - component: {fileID: 6535947131031927543}
+  - component: {fileID: 7790666290606112600}
+  - component: {fileID: 7790666290606112607}
+  - component: {fileID: 7790666290606112603}
+  - component: {fileID: 5455710627431088859}
+  - component: {fileID: 7790666290606112606}
   m_Layer: 0
-  m_Name: Coin
+  m_Name: Split Log 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6535947131031927542
+--- !u!4 &7790666290606112600
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535947131031927540}
+  m_GameObject: {fileID: 7790666290606112602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6535947131031927537
+--- !u!114 &7790666290606112607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535947131031927540}
+  m_GameObject: {fileID: 7790666290606112602}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0043dad69d37864caf8651000b2fb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Coin
---- !u!212 &6535947131031927541
+  itemName: Split Log 2
+--- !u!212 &7790666290606112603
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535947131031927540}
+  m_GameObject: {fileID: 7790666290606112602}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -88,8 +88,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b92986273bd25cd4e8043b1582537591, type: 3}
+  m_SortingOrder: 14
+  m_Sprite: {fileID: 21300000, guid: edc754aa69acef7438ae59bc328cab3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,14 +100,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6535947131031927536
+--- !u!50 &5455710627431088859
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535947131031927540}
+  m_GameObject: {fileID: 7790666290606112602}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -115,25 +115,25 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 11
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!58 &6535947131031927543
-CircleCollider2D:
+  m_Constraints: 5
+--- !u!70 &7790666290606112606
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6535947131031927540}
+  m_GameObject: {fileID: 7790666290606112602}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0069081783}
-  serializedVersion: 2
-  m_Radius: 12.958926
+  m_Offset: {x: -0.035188433, y: 0.5626846}
+  m_Size: {x: 5.631513, y: 3.0148406}
+  m_Direction: 1

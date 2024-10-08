@@ -5,17 +5,7 @@ public class DeliveryQuest : Quest
     [SerializeField] private Inventory inventory;
     [SerializeField] private GameObject[] desiredObjects;
 
-    // protected override bool CheckQuest()
-    // {
-    //     return CheckQuestRecursive();
-    // }
-
-    // private bool CheckQuestRecursive(int i, int j)
-    // {
-
-    // }
-
-    protected override bool CheckQuest() // Рекурсией попробуй сделать
+    protected override bool CheckQuest()
     {
         for (int i = 0; i < desiredObjects.Length; i++)
         {

@@ -19,7 +19,7 @@ public class InteractionButton : MonoBehaviour
     }
     public event Action btnExit;
     private bool inTrigger;
-    public bool pressed;
+    [HideInInspector] public bool pressed;
 
     [SerializeField] private Animator anim;
 

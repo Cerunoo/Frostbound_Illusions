@@ -5,12 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerController : MonoBehaviour, IPlayerController
 {
+    public static PlayerController Instance { get; private set; }
+
     [SerializeField] private ScriptableStats _stats;
-    [SerializeField] private PlayerStamina stamina;
+    [SerializeField] private bool useStamina;
+    private PlayerStamina stamina;
 
     [Header("Debug")]
     public bool disableMove;
-    [SerializeField] private bool isRunning; // Пока непонятно откуда будет изменяться
+    public bool isRunning;
+    public bool isSticky;
     public bool facingRight;
 
     private FrameInput _frameInput;
@@ -25,6 +29,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     public Vector2 FrameDirection => new Vector2(_frameInput.Horizontal, _frameVelocity.y);
     public bool IsRunning => isRunning;
+    public bool IsSticky => isSticky;
+    public float StickyDivider => _stats.StickyDivider;
     public event Action<bool, float> GroundedChanged;
     public event Action<bool> Jumped;
     public event Action<bool> DashedChanged;
@@ -35,6 +41,10 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void Awake()
     {
+        Instance = this;
+
+        if (useStamina) stamina = FindObjectOfType<PlayerStamina>();
+
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<CapsuleCollider2D>();
 
@@ -139,7 +149,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void HandleJump()
     {
-        if (_jumpToConsume && !_grounded && !doubleJump && !isDashing && stamina.TrySpendStamina())
+        if (_jumpToConsume && !_grounded && !doubleJump && !isDashing && useStamina && stamina.TrySpendStamina())
         {
             doubleJump = true;
             ExecuteJump(true);
@@ -156,11 +166,13 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void ExecuteJump(bool doubleJump = false)
     {
+        float jumpPower = !doubleJump ? (isSticky ? _stats.JumpPower / _stats.StickyDivider : _stats.JumpPower) : _stats.DoubleJumpPower;
+
         _endedJumpEarly = false;
         _timeJumpWasPressed = 0;
         _bufferedJumpUsable = false;
         _coyoteUsable = false;
-        _frameVelocity.y = (!doubleJump) ? _stats.JumpPower : _stats.DoubleJumpPower;
+        _frameVelocity.y = jumpPower;
         Jumped?.Invoke(doubleJump);
     }
 
@@ -177,7 +189,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
         }
         else
         {
-            _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Horizontal * (isRunning ? _stats.MaxRunSpeed : _stats.MaxWalkSpeed), _stats.Acceleration * Time.fixedDeltaTime);
+            float speed = isSticky ? (_stats.MaxWalkSpeed / _stats.StickyDivider) : (isRunning ? _stats.MaxRunSpeed : _stats.MaxWalkSpeed);
+            _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Horizontal * speed, _stats.Acceleration * Time.fixedDeltaTime);
         }
 
         if (_frameInput.Horizontal > 0 && !facingRight)
@@ -210,7 +223,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         dashDelay -= Time.deltaTime;
         if (_grounded) canNewDash = true;
 
-        if (_dashToConsume && dashDelay < 0 && !isDashing && canNewDash && stamina.TrySpendStamina()) StartCoroutine(ExecuteDash());
+        if (_dashToConsume && dashDelay < 0 && !isDashing && canNewDash && useStamina && stamina.TrySpendStamina()) StartCoroutine(ExecuteDash());
         _dashToConsume = false;
     }
 
@@ -270,6 +283,8 @@ public interface IPlayerController
 {
     public Vector2 FrameDirection { get; }
     public bool IsRunning { get; }
+    public bool IsSticky { get; }
+    public float StickyDivider { get; }
 
     public event Action<bool, float> GroundedChanged;
     public event Action<bool> Jumped;

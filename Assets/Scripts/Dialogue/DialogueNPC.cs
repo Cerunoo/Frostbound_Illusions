@@ -7,12 +7,13 @@ public class DialogueNPC : MonoBehaviour
     public InteractionButton button;
     [SerializeField] private Dialogue dialogue;
 
+    public event Action DialogueOver;
+
     public void TriggerDialogueOver()
     {
         OnDisable();
         DialogueOver?.Invoke();
     }
-    public event Action DialogueOver;
 
     private void OnEnable()
     {

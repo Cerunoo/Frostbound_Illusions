@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory Instance { get; private set; }
+
     public GameObject[] slots;
     public bool[] isFull;
     public GameObject[] slotItems;
@@ -22,8 +24,10 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         anim = gameObject.GetComponent<Animator>();
-        player = FindObjectOfType<PlayerController>();
+        if (PlayerController.Instance != null) player = PlayerController.Instance;
 
         if (InputController.Instance != null)
         {
@@ -90,7 +94,26 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void SwitchInventory()
+    public bool TryPickupItem(Sprite itemSprite, string itemName)
+    {
+        for (int i = 0; i < isFull.Length; i++)
+        {
+            if (isFull[i] == false)
+            {
+                Image slotImage = slots[i].transform.GetChild(0).GetComponent<Image>();
+                slotImage.sprite = itemSprite;
+                slotImage.gameObject.SetActive(true);
+
+                slotItems[i] = Resources.Load(itemName) as GameObject;
+                isFull[i] = true;
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void SwitchInventory()
     {
         anim.SetBool("open", !isOpen);
         animIsOn = true;

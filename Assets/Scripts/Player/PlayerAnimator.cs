@@ -5,7 +5,6 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float _maxTilt = 5;
     [SerializeField] private float _tiltSpeed = 20;
-    [SerializeField] private LayerMask DetectGroundLayer;
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem _jumpParticles;
@@ -23,7 +22,6 @@ public class PlayerAnimator : MonoBehaviour
     // private AudioSource _source;
     private IPlayerController _player;
     private bool _grounded;
-    private ParticleSystem.MinMaxGradient _currentGradient;
 
     private void Awake()
     {
@@ -48,7 +46,6 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        DetectGroundColor();
         HandleMove();
         HandleCharacterTilt();
         HandleFall();
@@ -57,8 +54,9 @@ public class PlayerAnimator : MonoBehaviour
     private void HandleMove()
     {
         var inputStrength = Mathf.Abs(_player.FrameDirection.x);
-        if (_player.IsRunning) _anim.SetBool(isRunningKey, inputStrength > 0);
-        else _anim.SetBool(isWalkingKey, inputStrength > 0);
+        _anim.SetBool(isRunningKey, !_player.IsSticky ? (_player.IsRunning ? inputStrength > 0 : false) : false);
+        _anim.SetBool(isWalkingKey, !_player.IsSticky ? (!_player.IsRunning ? inputStrength > 0 : false) : true);
+        _anim.SetFloat(StickyDividerKey, _player.IsSticky ? 1 / _player.StickyDivider : 1);
         _moveParticles.transform.localScale = Vector3.MoveTowards(_moveParticles.transform.localScale, Vector3.one * inputStrength, 2 * Time.deltaTime);
     }
 
@@ -80,8 +78,6 @@ public class PlayerAnimator : MonoBehaviour
 
         if (_grounded) // Avoid coyote
         {
-            SetColor(_jumpParticles);
-            SetColor(_launchParticles);
             _jumpParticles.Play();
         }
         else if (doubleJump)
@@ -116,9 +112,6 @@ public class PlayerAnimator : MonoBehaviour
 
         if (grounded)
         {
-            DetectGroundColor();
-            SetColor(_landParticles);
-
             _anim.SetTrigger(GroundedKey);
             // _source.PlayOneShot(_footsteps[Random.Range(0, _footsteps.Length)]);
             _moveParticles.Play();
@@ -132,26 +125,11 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    private void DetectGroundColor()
-    {
-        var hit = Physics2D.Raycast(transform.position, Vector3.down, 2, DetectGroundLayer);
-
-        if (!hit || hit.collider.isTrigger || !hit.transform.TryGetComponent(out SpriteRenderer r)) return;
-        var color = r.color;
-        _currentGradient = new ParticleSystem.MinMaxGradient(color * 0.9f, color * 1.2f);
-        SetColor(_moveParticles);
-    }
-
-    private void SetColor(ParticleSystem ps)
-    {
-        var main = ps.main;
-        main.startColor = _currentGradient;
-    }
-
     private static readonly int isRunningKey = Animator.StringToHash("isRunning");
     private static readonly int isWalkingKey = Animator.StringToHash("isWalking");
     private static readonly int JumpKey = Animator.StringToHash("Jump");
     private static readonly int FallKey = Animator.StringToHash("Fall");
     private static readonly int GroundedKey = Animator.StringToHash("Grounded");
     private static readonly int DashKey = Animator.StringToHash("Dash");
+    private static readonly int StickyDividerKey = Animator.StringToHash("StickyDivider");
 }

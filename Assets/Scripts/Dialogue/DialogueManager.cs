@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -23,20 +24,19 @@ public class DialogueManager : MonoBehaviour
         boxAnim = GetComponent<Animator>();
         sentences = new Queue<string>();
 
-        player = FindObjectOfType<PlayerController>();
+        if (PlayerController.Instance != null) player = PlayerController.Instance;
+    }
 
-        if (InputController.Instance != null)
-        {
-            InputController.Instance.controls.Dialogue.NextSentence.performed += context =>
-            {
-                if (!isTyping) DisplayNextSentence();
-                else btnDown = true;
-            };
-        }
+    private void InputNextSentence(InputAction.CallbackContext context)
+    {
+        if (!isTyping) DisplayNextSentence();
+        else btnDown = true;
     }
 
     public void StartDialogue(Dialogue dialogue, DialogueNPC npc)
     {
+        if (InputController.Instance != null) InputController.Instance.controls.Dialogue.NextSentence.performed += InputNextSentence;
+
         currentNPC = npc;
 
         boxAnim.SetBool("show", true);
@@ -89,6 +89,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        if (InputController.Instance != null) InputController.Instance.controls.Dialogue.NextSentence.performed -= InputNextSentence;
+
         if (currentNPC != null) currentNPC.button.pressed = false;
         currentNPC = null;
 
