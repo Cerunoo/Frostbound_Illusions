@@ -4,7 +4,7 @@ public class InputController : MonoBehaviour
 {
     public static InputController Instance { get; private set; }
     public InputSettings controls { private set; get; }
-
+    
     private void Awake()
     {
         Instance = this;
