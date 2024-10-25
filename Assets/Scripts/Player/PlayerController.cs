@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         Instance = this;
 
-        if (useStamina) stamina = FindObjectOfType<PlayerStamina>();
+        if (useStamina) stamina = FindFirstObjectByType<PlayerStamina>();
 
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<CapsuleCollider2D>();
@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
             ExecuteJump(true);
         }
 
-        if (!_endedJumpEarly && !_grounded && !_frameInput.JumpHeld && _rb.velocity.y > 0) _endedJumpEarly = true;
+        if (!_endedJumpEarly && !_grounded && !_frameInput.JumpHeld && _rb.linearVelocity.y > 0) _endedJumpEarly = true;
 
         if (!_jumpToConsume && !HasBufferedJump) return;
 
@@ -270,7 +270,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     #endregion
 
-    private void ApplyMovement() => _rb.velocity = _frameVelocity;
+    private void ApplyMovement() => _rb.linearVelocity = _frameVelocity;
 }
 
 public struct FrameInput

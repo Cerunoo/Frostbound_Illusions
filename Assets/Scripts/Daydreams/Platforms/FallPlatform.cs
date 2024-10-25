@@ -23,6 +23,6 @@ public class FallPlatform : MonoBehaviour
 
     private void DropPlatform()
     {
-        rb.isKinematic = false;
+        rb.bodyType = RigidbodyType2D.Dynamic;
     }
 }

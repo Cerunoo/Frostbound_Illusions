@@ -18,9 +18,9 @@ MonoBehaviour:
   SnapInput: 1
   VerticalDeadZoneThreshold: 0.3
   HorizontalDeadZoneThreshold: 0.1
-  MaxRunSpeed: 6
-  MaxWalkSpeed: 4.25
-  Acceleration: 120
+  MaxRunSpeed: 4.5
+  MaxWalkSpeed: 3.5
+  Acceleration: 70
   GroundDeceleration: 60
   AirDeceleration: 30
   GroundingForce: -1.5
@@ -61,8 +61,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   DashTime: 0.13
   DashDelay: 0.65
-  JumpPower: 14.5
-  DoubleJumpPower: 12
+  JumpPower: 13
+  DoubleJumpPower: 11
   MaxFallSpeed: 35
   FallAcceleration: 40
   JumpEndEarlyGravityModifier: 3
