@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
@@ -190,6 +191,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         else
         {
             float speed = isSticky ? (_stats.MaxWalkSpeed / _stats.StickyDivider) : (isRunning ? _stats.MaxRunSpeed : _stats.MaxWalkSpeed);
+            if (!_grounded) speed *= _stats.airMultiplier;
             _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Horizontal * speed, _stats.Acceleration * Time.fixedDeltaTime);
         }
 

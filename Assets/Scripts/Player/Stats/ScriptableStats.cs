@@ -24,6 +24,9 @@ public class ScriptableStats : ScriptableObject
     [Tooltip("Maximum walking speed")]
     public float MaxWalkSpeed = 10;
 
+    [Tooltip("Value of multiplying the speed in air")]
+    public float airMultiplier = 1.5f;
+
     [Tooltip("The player's capacity to gain horizontal speed")]
     public float Acceleration = 120;
 

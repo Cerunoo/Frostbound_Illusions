@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] private float _maxTilt = 5;
-    [SerializeField] private float _tiltSpeed = 20;
-
     [Header("Particles")]
     [SerializeField] private ParticleSystem _jumpParticles;
     [SerializeField] private ParticleSystem _launchParticles;
@@ -47,7 +43,6 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         HandleMove();
-        HandleCharacterTilt();
         HandleFall();
     }
 
@@ -58,12 +53,6 @@ public class PlayerAnimator : MonoBehaviour
         _anim.SetBool(isWalkingKey, !_player.IsSticky ? (!_player.IsRunning ? inputStrength > 0 : false) : true);
         _anim.SetFloat(StickyDividerKey, _player.IsSticky ? 1 / _player.StickyDivider : 1);
         _moveParticles.transform.localScale = Vector3.MoveTowards(_moveParticles.transform.localScale, Vector3.one * inputStrength, 2 * Time.deltaTime);
-    }
-
-    private void HandleCharacterTilt()
-    {
-        var runningTilt = _grounded ? Quaternion.Euler(0, 0, _maxTilt * _player.FrameDirection.x) : Quaternion.identity;
-        _anim.transform.up = Vector3.RotateTowards(_anim.transform.up, runningTilt * Vector2.up, _tiltSpeed * Time.deltaTime, 0f);
     }
 
     private void HandleFall()

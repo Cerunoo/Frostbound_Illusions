@@ -20,6 +20,7 @@ MonoBehaviour:
   HorizontalDeadZoneThreshold: 0.1
   MaxRunSpeed: 4.5
   MaxWalkSpeed: 3.5
+  airMultiplier: 1.2
   Acceleration: 70
   GroundDeceleration: 60
   AirDeceleration: 30

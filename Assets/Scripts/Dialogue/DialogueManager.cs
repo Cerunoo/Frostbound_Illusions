@@ -43,13 +43,14 @@ public class DialogueManager : MonoBehaviour
         player.disableMove = true;
 
         nameText.text = dialogue.name;
+        dialogueText.text = "";
         sentences.Clear();
 
         foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
-        DisplayNextSentence();
+        // DisplayNextSentence(); // Функция вызывается из ключа события в анимации Show
     }
 
     public void DisplayNextSentence()
