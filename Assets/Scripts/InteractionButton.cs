@@ -9,14 +9,15 @@ public class InteractionButton : MonoBehaviour
         add
         {
             _btnPress += value;
-            IsDisable = false;
+            nullListeners = false;
         }
         remove
         {
             _btnPress -= value;
-            if (_btnPress == null) IsDisable = true;
+            if (_btnPress == null) nullListeners = true;
         }
     }
+    private bool nullListeners;
     public event Action btnExit;
     private bool inTrigger;
     [HideInInspector] public bool pressed;
@@ -42,9 +43,9 @@ public class InteractionButton : MonoBehaviour
     {
         if (InputController.Instance != null)
         {
-            InputController.Instance.controls.InteractionButton.Press.performed += context =>
+            InputController.Instance.controls.Interactions.Call.performed += context =>
             {
-                if (inTrigger && !IsDisable && !pressed)
+                if (inTrigger && !IsDisable && !nullListeners && !pressed)
                 {
                     anim.SetBool("Show", false);
                     anim.SetBool("Pressed", true);
@@ -58,7 +59,7 @@ public class InteractionButton : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && !IsDisable)
+        if (other.tag == "Player" && !IsDisable && !nullListeners)
         {
             anim.SetBool("Show", true);
             inTrigger = true;
@@ -67,7 +68,7 @@ public class InteractionButton : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player" && !IsDisable)
+        if (other.tag == "Player" && !IsDisable && !nullListeners)
         {
             anim.SetBool("Show", false);
             anim.SetBool("Pressed", false);
@@ -75,5 +76,15 @@ public class InteractionButton : MonoBehaviour
 
             btnExit?.Invoke();
         }
+    }
+
+    public static void StaticDisable(InteractionButton button)
+    {
+        button.IsDisable = true;
+    }
+
+    public static void StaticEnable(InteractionButton button)
+    {
+        button.IsDisable = false;
     }
 }

@@ -8,8 +8,12 @@ public class Item : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if ((bool)Inventory.Instance?.TryPickupItem(GetComponent<SpriteRenderer>().sprite, itemName))
+            if (Inventory.Instance == null) return;
+            Inventory inventory = Inventory.Instance;
+
+            if (inventory.CanPickupItem())
             {
+                inventory.PickupItem(GetComponent<SpriteRenderer>().sprite, itemName);
                 Destroy(gameObject);
             }
         }

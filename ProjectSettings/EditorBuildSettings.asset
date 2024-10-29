@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 2546a28e8cb7b8741815890341c5f095
+  - enabled: 1
     path: Assets/Scenes/Forest.unity
     guid: 7197cfff841af854a9ec4fbad4cb1fc1
+  - enabled: 1
+    path: Assets/Scenes/House.unity
+    guid: fc191ef0f6434864685ef5d39619bd48
   - enabled: 1
     path: Assets/Scenes/Daydreams.unity
     guid: 1eb8cb39a3a92fe41a8a54e084ed9362

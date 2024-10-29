@@ -31,7 +31,10 @@ public class Inventory : MonoBehaviour
 
         if (InputController.Instance != null)
         {
-            InputController.Instance.controls.Inventory.SwitchOpen.performed += context => { if (!animIsOn && isWork) SwitchInventory(); };
+            InputController.Instance.controls.Inventory.SwitchOpen.performed += context =>
+            {
+                if (!animIsOn && isWork) SwitchInventory();
+            };
 
             InputController.Instance.controls.Inventory.SelectLeft.performed += context => SelectLeft();
             InputController.Instance.controls.Inventory.SelectRight.performed += context => SelectRight();
@@ -94,7 +97,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool TryPickupItem(Sprite itemSprite, string itemName)
+    public void PickupItem(Sprite itemSprite, string itemName)
     {
         for (int i = 0; i < isFull.Length; i++)
         {
@@ -106,9 +109,16 @@ public class Inventory : MonoBehaviour
 
                 slotItems[i] = Resources.Load(itemName) as GameObject;
                 isFull[i] = true;
-
-                return true;
+                return;
             }
+        }
+    }
+
+    public bool CanPickupItem()
+    {
+        for (int i = 0; i < isFull.Length; i++)
+        {
+            if (isFull[i] == false) return true;
         }
         return false;
     }
@@ -159,17 +169,17 @@ public class Inventory : MonoBehaviour
                     animIsOn = false;
                     isOpen = false;
 
-                    anim.SetBool("hide", true);
+                    // anim.SetBool("hide", true);
                 }
             }
             else
             {
-                anim.SetBool("hide", true);
+                // anim.SetBool("hide", true);
             }
         }
         else
         {
-            anim.SetBool("hide", false);
+            // anim.SetBool("hide", false);
         }
     }
 }

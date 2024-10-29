@@ -7,6 +7,10 @@ public class Quest : MonoBehaviour
     [SerializeField] protected DisableWallNPC disableWallNPC;
     protected enum DisableWallNPC { None, AfterGot, AfterPass }
 
+    [SerializeField] protected GameObject[] includeObjects;
+    [SerializeField] protected IncludeObjectsAfter includeObjectAfter;
+    protected enum IncludeObjectsAfter { None, AfterGot, AfterPass }
+
     [SerializeField] protected Dialogue passDialogue;
     [SerializeField] protected Dialogue failDialogue;
 
@@ -22,12 +26,14 @@ public class Quest : MonoBehaviour
         questGot = true;
         QuestGotEvent?.Invoke(this);
         if (disableWallNPC == DisableWallNPC.AfterGot) GetComponent<Collider2D>().enabled = false;
+        if (includeObjectAfter == IncludeObjectsAfter.AfterGot) foreach (GameObject item in includeObjects) item.SetActive(true);
         npc.button.btnPress += TriggerDialogue;
     }
     protected virtual void Pass()
     {
         QuestPassedEvent?.Invoke(this);
         if (disableWallNPC == DisableWallNPC.AfterPass) GetComponent<Collider2D>().enabled = false;
+        if (includeObjectAfter == IncludeObjectsAfter.AfterPass) foreach (GameObject item in includeObjects) item.SetActive(true);
         npc.button.btnPress -= TriggerDialogue;
     }
     protected virtual void TriggerDialogue()
@@ -42,6 +48,8 @@ public class Quest : MonoBehaviour
     {
         npc = GetComponent<DialogueNPC>();
         npc.DialogueOver += Got;
+
+        foreach (GameObject item in includeObjects) item.SetActive(false);
     }
     protected virtual void OnDisable()
     {

@@ -9,7 +9,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "d5c53e0e-9cf4-44e5-888f-239a21691742",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -154,7 +154,7 @@
                     "name": "SwitchOpen",
                     "type": "Button",
                     "id": "271a07fd-f219-450f-9de2-7634e87abc14",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -279,14 +279,41 @@
             ]
         },
         {
-            "name": "InteractionButton",
+            "name": "Interactions",
             "id": "2d1460d0-9e22-49ad-8507-d0b2b682eb1c",
             "actions": [
                 {
-                    "name": "Press",
+                    "name": "Call",
                     "type": "Button",
                     "id": "6fd6aab2-63ba-4d7b-9a88-60f9c77fe995",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pazzle1",
+                    "type": "Button",
+                    "id": "b176b254-d790-4e46-98cd-3198ec509fae",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pazzle2",
+                    "type": "Button",
+                    "id": "4a7b9f4f-76a9-4c7b-8dff-d665756437eb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pazzle3",
+                    "type": "Button",
+                    "id": "7d4d136c-23c2-4e3d-9139-041e67d5e43c",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -300,7 +327,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Press",
+                    "action": "Call",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -311,7 +338,73 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Press",
+                    "action": "Call",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "719f4f76-285e-43a8-8c13-c735b06b2cea",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pazzle1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a972d78-1e7a-4e96-9e40-b23fb5476208",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pazzle1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6eac7ce-7a47-4621-a938-eecc0e8c3f5e",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pazzle2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2801d552-0d20-4e7e-93a4-6a21e274e2a0",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pazzle2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45ec283c-e156-41b9-947b-26ca7011c625",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pazzle3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "35f86d6e-6654-461c-a38a-fb056725cb4a",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pazzle3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -325,7 +418,7 @@
                     "name": "NextSentence",
                     "type": "Button",
                     "id": "42fed725-9d4b-412b-8de7-27feaac7bbe6",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

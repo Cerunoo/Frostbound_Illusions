@@ -7,7 +7,7 @@ MonoImporter:
   - _stats: {fileID: 11400000, guid: 06d44d479e78f824baf7f057475eb400, type: 2}
   - input: {instanceID: 0}
   - stamina: {instanceID: 0}
-  executionOrder: 0
+  executionOrder: -35
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

@@ -164,7 +164,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   receivedItem: {fileID: 7790666290606112607, guid: e1e0f262a1c1b6a4d82a48d8b3665c6b, type: 3}
+  pazzlePrefab: {fileID: 1756950312021367670, guid: 924918c73687520428b9a18209523822, type: 3}
 --- !u!212 &2908810144543085311
 SpriteRenderer:
   m_ObjectHideFlags: 0
