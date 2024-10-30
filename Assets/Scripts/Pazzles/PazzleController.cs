@@ -12,7 +12,7 @@ public class PazzleController : MonoBehaviour
     {
         if (PlayerController.Instance != null) player = PlayerController.Instance;
         player.disableMove = true;
-
+        
         if (Inventory.Instance != null) inventory = Inventory.Instance;
         inventory.SwitchStateWork();
     }
@@ -20,6 +20,7 @@ public class PazzleController : MonoBehaviour
     public void InvokePassedAction()
     {
         passed?.Invoke();
+
         player.disableMove = false;
         inventory.SwitchStateWork();
     }
