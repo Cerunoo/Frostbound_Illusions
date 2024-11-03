@@ -123,6 +123,15 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    public bool CheckItem(GameObject check)
+    {
+        foreach(GameObject item in slotItems)
+        {
+            if (check == item) return true;
+        }
+        return false;
+    }
+
     private void SwitchInventory()
     {
         anim.SetBool("open", !isOpen);

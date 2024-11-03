@@ -7,8 +7,12 @@ public class DeliveryQuest : Quest
 
     protected override bool CheckQuest()
     {
+        bool result = true;
+
         for (int i = 0; i < desiredObjects.Length; i++)
         {
+            if (desiredObjects[i] == null) continue;
+
             for (int j = 0; j < inventory.slotItems.Length; j++)
             {
                 if (desiredObjects[i] == inventory.slotItems[j])
@@ -17,9 +21,10 @@ public class DeliveryQuest : Quest
                     inventory.DropItem(true, j);
                     break;
                 }
-                else if (j == inventory.slotItems.Length - 1) return false;
+                else if (j == inventory.slotItems.Length - 1) result = false;
             }
         }
-        return true;
+
+        return result;
     }
 }

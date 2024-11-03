@@ -6,6 +6,20 @@ public class ForestManager : MonoBehaviour
     [SerializeField] private InteractionButton homeButton;
     [SerializeField] private int indexHouseScene;
 
+    [SerializeField] private DeliveryQuest logQuest;
+
+    private void OnEnable()
+    {
+        homeButton.btnPress += LoadHouseScene;
+        logQuest.QuestGotEvent += GetBP;
+    }
+
+    private void GetBP(Quest quest)
+    {
+        if (Inventory.Instance != null) Inventory.Instance.GetComponent<Animator>().SetBool("hide", false);
+        logQuest.GetComponent<Animator>().SetBool("GetBP", true);
+    }
+
     private void LoadHouseScene()
     {
         StartCoroutine(Wait());
@@ -18,6 +32,4 @@ public class ForestManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         AsyncLoading.LoadScene(indexHouseScene);
     }
-
-    private void OnEnable() => homeButton.btnPress += LoadHouseScene;
 }

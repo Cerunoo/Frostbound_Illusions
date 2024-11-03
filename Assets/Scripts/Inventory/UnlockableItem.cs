@@ -3,7 +3,10 @@ using UnityEngine;
 public class UnlockableItem : MonoBehaviour
 {
     [SerializeField] private Item receivedItem;
+    [SerializeField] private InteractionButton button;
     public GameObject pazzlePrefab;
+
+    [SerializeField] private GameObject requiredItemToUnlock;
 
     private Inventory inventory;
 
@@ -15,7 +18,7 @@ public class UnlockableItem : MonoBehaviour
 
     private void TryReceiveItem()
     {
-        if (inventory.CanPickupItem())
+        if (inventory.CanPickupItem() && inventory.CheckItem(requiredItemToUnlock))
         {
             GameObject pazzle = Instantiate(pazzlePrefab, Vector2.zero, Quaternion.identity, FindFirstObjectByType<Canvas>().transform);
             pazzle.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
@@ -23,7 +26,7 @@ public class UnlockableItem : MonoBehaviour
         }
         else
         {
-            GetComponentInChildren<InteractionButton>().pressed = false;
+            button.pressed = false;
         }
     }
 
@@ -33,5 +36,5 @@ public class UnlockableItem : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnEnable() => GetComponentInChildren<InteractionButton>().btnPress += TryReceiveItem;
+    private void OnEnable() => button.btnPress += TryReceiveItem;
 }
