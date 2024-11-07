@@ -11,8 +11,8 @@ public class Quest : MonoBehaviour
     [SerializeField] protected IncludeObjectsAfter includeObjectAfter;
     protected enum IncludeObjectsAfter { None, AfterGot, AfterPass }
 
-    [SerializeField] protected Dialogue passDialogue;
-    [SerializeField] protected Dialogue failDialogue;
+    [SerializeField] protected TextAsset passDialog;
+    [SerializeField] protected TextAsset failDialog;
 
     protected DialogueNPC npc;
     protected bool questGot;
@@ -39,7 +39,7 @@ public class Quest : MonoBehaviour
     protected virtual void TriggerDialogue()
     {
         bool passQuest = CheckQuest();
-        npc.dm.StartDialogue(passQuest ? passDialogue : failDialogue, npc);
+        npc.dm.StartDialogue(passQuest ? passDialog : failDialog, npc);
         if (passQuest) Pass();
     }
     protected virtual bool CheckQuest() => true;

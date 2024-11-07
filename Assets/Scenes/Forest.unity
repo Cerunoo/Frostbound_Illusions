@@ -46748,15 +46748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dm: {fileID: 2075856558}
   button: {fileID: 2558148062423190874}
-  dialogue:
-    name: Verrden
-    sentences:
-    - "\u041F\u0440\u0438\u0432\u0435\u0442! \u041F\u043E\u043C\u043E\u0433\u0438
-      \u043C\u043D\u0435 \u0441\u043E\u0431\u0440\u0430\u0442\u044C \u0438 \u0440\u0430\u0441\u043A\u043E\u043B\u043E\u0442\u044C
-      \u0431\u0440\u0451\u0432\u043D\u0430 \u0437\u0434\u0435\u0441\u044C."
-    - "\u041F\u044F\u0442\u0438 \u0431\u0440\u0435\u0432\u0435\u043D \u0445\u0432\u0430\u0442\u0438\u0442."
-    - "\u0422\u043E\u043F\u043E\u0440 \u0440\u044F\u0434\u043E\u043C."
-    - "\u0412\u043E\u0437\u044C\u043C\u0435\u0448\u044C \u043C\u043E\u0439 \u0440\u044E\u043A\u0437\u0430\u043A."
+  dialog: {fileID: 4900000, guid: 069ad52d545949148a8d04f286343af1, type: 3}
 --- !u!95 &1428242052
 Animator:
   serializedVersion: 7
@@ -46836,14 +46828,8 @@ MonoBehaviour:
   - {fileID: 1446005915}
   - {fileID: 827251998}
   includeObjectAfter: 1
-  passDialogue:
-    name: Verrden
-    sentences:
-    - You passed the quest.
-  failDialogue:
-    name: Verrden
-    sentences:
-    - We need five logs.
+  passDialog: {fileID: 4900000, guid: 40a3477044c84814e806e98bb06f1e8e, type: 3}
+  failDialog: {fileID: 4900000, guid: 51bfab63222406f47acc7e90eb77a7a9, type: 3}
   inventory: {fileID: 1967925677}
   desiredObjects:
   - {fileID: 1222834732616808092, guid: 28a35084a1320b24abc89d786b0cf11b, type: 3}

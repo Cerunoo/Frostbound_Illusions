@@ -33,10 +33,11 @@ public class DialogueManager : MonoBehaviour
         else btnDown = true;
     }
 
-    public void StartDialogue(Dialogue dialogue, DialogueNPC npc)
+    public void StartDialogue(TextAsset dialog, DialogueNPC npc)
     {
         if (InputController.Instance != null) InputController.Instance.controls.Dialogue.NextSentence.performed += InputNextSentence;
 
+        Dialogue dialogue = JsonUtility.FromJson<Dialogue>(dialog.ToString());
         currentNPC = npc;
 
         boxAnim.SetBool("show", true);

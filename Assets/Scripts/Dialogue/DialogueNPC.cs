@@ -5,7 +5,7 @@ public class DialogueNPC : MonoBehaviour
 {
     public DialogueManager dm;
     public InteractionButton button;
-    [SerializeField] private Dialogue dialogue;
+    [SerializeField] private TextAsset dialog;
 
     public event Action DialogueOver;
 
@@ -25,5 +25,5 @@ public class DialogueNPC : MonoBehaviour
         button.btnPress -= TriggerDialogue;
     }
 
-    private void TriggerDialogue() => dm.StartDialogue(dialogue, this);
+    private void TriggerDialogue() => dm.StartDialogue(dialog, this);
 }
