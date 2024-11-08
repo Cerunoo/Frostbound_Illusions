@@ -24,7 +24,7 @@ public class ForestManager : MonoBehaviour
     {
         StartCoroutine(Wait());
         if (PlayerController.Instance != null) PlayerController.Instance.disableMove = true;
-        if (Inventory.Instance != null) Inventory.Instance.SwitchStateWork();
+        if (Inventory.Instance != null) Inventory.Instance.SetStateWork(false);
     }
 
     private IEnumerator Wait() // Искусственное ожидание загрузки сцены, временно

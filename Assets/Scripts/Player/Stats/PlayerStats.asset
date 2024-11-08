@@ -20,7 +20,7 @@ MonoBehaviour:
   HorizontalDeadZoneThreshold: 0.1
   MaxRunSpeed: 4.5
   MaxWalkSpeed: 3.5
-  airMultiplier: 1.2
+  airMultiplier: 1.14
   Acceleration: 70
   GroundDeceleration: 60
   AirDeceleration: 30
@@ -69,4 +69,4 @@ MonoBehaviour:
   JumpEndEarlyGravityModifier: 3
   CoyoteTime: 0.15
   JumpBuffer: 0.2
-  StickyDivider: 2.3
+  StickyDivider: 1.65

@@ -31,7 +31,7 @@ public class TimelineController : MonoBehaviour
     private void DisableInteractions(bool disable)
     {
         if (PlayerController.Instance != null) PlayerController.Instance.disableMove = disable;
-        if (Inventory.Instance != null) Inventory.Instance.SwitchStateWork();
+        if (Inventory.Instance != null) Inventory.Instance.SetStateWork(!disable);
 
         InteractionButton[] buttons = FindObjectsByType<InteractionButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         if (disable) Array.ForEach(buttons, InteractionButton.StaticDisable);

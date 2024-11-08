@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class Inventory : MonoBehaviour
 {
@@ -158,9 +159,44 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    [Obsolete("This method is outdated. Use SetStateWork(bool)")]
     public void SwitchStateWork()
     {
         isWork = !isWork;
+
+        if (isWork == false)
+        {
+            if (isOpen || animIsOn)
+            {
+                anim.SetBool("open", false);
+                animIsOn = true;
+
+                slots[selectedSlot].GetComponent<Image>().color = normalColor;
+
+                StartCoroutine(waitEnd());
+                IEnumerator waitEnd()
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    animIsOn = false;
+                    isOpen = false;
+
+                    // anim.SetBool("hide", true);
+                }
+            }
+            else
+            {
+                // anim.SetBool("hide", true);
+            }
+        }
+        else
+        {
+            // anim.SetBool("hide", false);
+        }
+    }
+
+    public void SetStateWork(bool state)
+    {
+        isWork = state;
 
         if (isWork == false)
         {

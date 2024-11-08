@@ -272,6 +272,17 @@ public class PlayerController : MonoBehaviour, IPlayerController
     #endregion
 
     private void ApplyMovement() => _rb.linearVelocity = _frameVelocity;
+
+    #region SetFunc rbStates
+
+    public void SetSticky(bool value)
+    {
+        isSticky = value;
+    }
+
+    // ...
+
+    #endregion
 }
 
 public struct FrameInput

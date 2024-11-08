@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7264716257408508237}
   - component: {fileID: 6225658337781466071}
   - component: {fileID: 1977167424255363558}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,6 +164,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.16700374, y: 0.23644269}
-  m_Size: {x: 0.69112337, y: 1.1600842}
+  m_Offset: {x: -0.16700374, y: 0.10792778}
+  m_Size: {x: 0.69112337, y: 0.9030535}
   m_Direction: 0
