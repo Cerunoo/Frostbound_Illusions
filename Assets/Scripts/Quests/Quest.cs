@@ -35,7 +35,7 @@ public class Quest : MonoBehaviour
         QuestGotEvent?.Invoke(this);
         if (disableWallNPC == DisableWallNPC.AfterGot) GetComponent<Collider2D>().enabled = false;
         foreach (IncludeObjectsController item in includeObjectsControllers) item.TryInclude(IncludeObjectsController.IncludeObjectsAfter.AfterGot);
-        if (executeEventsAfter == ExecuteEventsAfter.AfterGot) m_ExecuteEvents.Invoke();
+        if (executeEventsAfter == ExecuteEventsAfter.AfterGot) m_ExecuteEvents?.Invoke();
         npc.button.btnPress += TriggerDialogue;
     }
     protected virtual void Pass()
@@ -45,7 +45,7 @@ public class Quest : MonoBehaviour
         QuestPassedEvent?.Invoke(this);
         if (disableWallNPC == DisableWallNPC.AfterPass) GetComponent<Collider2D>().enabled = false;
         foreach (IncludeObjectsController item in includeObjectsControllers) item.TryInclude(IncludeObjectsController.IncludeObjectsAfter.AfterPass);
-        if (executeEventsAfter == ExecuteEventsAfter.AfterPass) m_ExecuteEvents.Invoke();
+        if (executeEventsAfter == ExecuteEventsAfter.AfterPass) m_ExecuteEvents?.Invoke();
         if (afterwordDialog == null) npc.button.btnPress -= TriggerDialogue;
     }
     protected virtual void TriggerDialogue()

@@ -38,7 +38,12 @@ public class TimelineController : MonoBehaviour
         else if (!disable) Array.ForEach(buttons, InteractionButton.StaticEnable);
     }
 
-    public void PlayAsset(PlayableAsset asset, DirectorWrapMode mode = DirectorWrapMode.None)
+    public void PlayAsset(PlayableAsset asset)
+    {
+        director.Play(asset);
+    }
+
+    public void PlayAsset(PlayableAsset asset, DirectorWrapMode mode)
     {
         director.Play(asset, mode);
     }
