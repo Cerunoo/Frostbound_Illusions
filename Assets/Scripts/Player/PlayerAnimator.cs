@@ -49,9 +49,18 @@ public class PlayerAnimator : MonoBehaviour
     private void HandleMove()
     {
         var inputStrength = Mathf.Abs(_player.FrameDirection.x);
-        _anim.SetBool(isRunningKey, !_player.IsSticky ? (_player.IsRunning ? inputStrength > 0 : false) : false);
-        _anim.SetBool(isWalkingKey, !_player.IsSticky ? (!_player.IsRunning ? inputStrength > 0 : false) : true);
-        _anim.SetFloat(StickyDividerKey, _player.IsSticky ? 1 / _player.StickyDivider : 1);
+        if (_player.IsSticky)
+        {
+            _anim.SetBool(isRunningKey, false);
+            _anim.SetBool(isWalkingKey, inputStrength > 0);
+            _anim.SetFloat(StickyDividerKey, 1 / _player.StickyDivider);
+        }
+        else
+        {
+            _anim.SetBool(isRunningKey, _player.IsRunning ? inputStrength > 0 : false);
+            _anim.SetBool(isWalkingKey, !_player.IsRunning ? inputStrength > 0 : false);
+            _anim.SetFloat(StickyDividerKey, 1);
+        }
         _moveParticles.transform.localScale = Vector3.MoveTowards(_moveParticles.transform.localScale, Vector3.one * inputStrength, 2 * Time.deltaTime);
     }
 

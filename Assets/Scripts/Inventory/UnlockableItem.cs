@@ -9,6 +9,7 @@ public class UnlockableItem : MonoBehaviour
     [SerializeField] private GameObject requiredItemToUnlock;
 
     private Inventory inventory;
+    private GameObject onlyPazzle;
 
     private void Start()
     {
@@ -20,9 +21,10 @@ public class UnlockableItem : MonoBehaviour
     {
         if (inventory.CanPickupItem() && inventory.CheckItem(requiredItemToUnlock))
         {
-            GameObject pazzle = Instantiate(pazzlePrefab, Vector2.zero, Quaternion.identity, FindFirstObjectByType<Canvas>().transform);
-            pazzle.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
-            pazzle.GetComponent<PazzleController>().passed += ReceiveItem;
+            onlyPazzle = Instantiate(pazzlePrefab, Vector2.zero, Quaternion.identity, FindFirstObjectByType<Canvas>().transform);
+            onlyPazzle.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
+            onlyPazzle.GetComponent<PazzleController>().passed += ReceiveItem;
+            onlyPazzle.GetComponent<PazzleController>().failed += FailedReceive;
         }
         else
         {
@@ -32,8 +34,25 @@ public class UnlockableItem : MonoBehaviour
 
     private void ReceiveItem()
     {
+        if (onlyPazzle != null)
+        {
+            onlyPazzle.GetComponent<PazzleController>().passed -= ReceiveItem;
+            onlyPazzle.GetComponent<PazzleController>().failed -= FailedReceive;
+        }
+
         inventory.PickupItem(receivedItem.GetComponent<SpriteRenderer>().sprite, receivedItem.itemName);
         Destroy(gameObject);
+    }
+
+    private void FailedReceive()
+    {
+        button.pressed = false;
+
+        if (onlyPazzle != null)
+        {
+            onlyPazzle.GetComponent<PazzleController>().passed -= ReceiveItem;
+            onlyPazzle.GetComponent<PazzleController>().failed -= FailedReceive;
+        }
     }
 
     private void OnEnable() => button.btnPress += TryReceiveItem;

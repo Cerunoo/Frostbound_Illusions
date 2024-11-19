@@ -4,6 +4,7 @@ using UnityEngine;
 public class PazzleController : MonoBehaviour
 {
     public event Action passed;
+    public event Action failed;
 
     private PlayerController player;
 
@@ -16,7 +17,12 @@ public class PazzleController : MonoBehaviour
     public void InvokePassedAction()
     {
         passed?.Invoke();
+        player.disableMove = false;
+    }
 
+    public void InvokeFailedAction()
+    {
+        failed?.Invoke();
         player.disableMove = false;
     }
 }

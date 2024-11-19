@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c805090fc218c5f4c942411fa76b9bff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53269f79c3e7b0d438dd84db5e6ec4dc, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -160,14 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7119343b718db4795756decae45d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
+  buttonsYHB:
   - {fileID: 1552671324925345571}
   - {fileID: 3704191471338901545}
   - {fileID: 1079439581943551077}
-  speedsPress:
-  - 0.55
-  - 0.8
-  - 1.4
+  speedPress: 2.5
 --- !u!114 &2249042752588053760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c805090fc218c5f4c942411fa76b9bff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07734b6cb2e3e964cb3ec9dfc1fc595c, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -487,7 +484,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c805090fc218c5f4c942411fa76b9bff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4ece584bcd52e746962e6d4e01d6694, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
