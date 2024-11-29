@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class LinearButtons : MonoBehaviour
 {
-    [SerializeField] private LinButton[] buttons;
+    private LinButton[] buttons;
 
     [Space(5)]
     [SerializeField] private GameObject buttonPrefab;
@@ -19,8 +19,10 @@ public class LinearButtons : MonoBehaviour
 
     private bool passed;
 
-    private void Awake()
+    public void AwakeManual(LinButton[] buttonsInput)
     {
+        buttons = buttonsInput;
+
         queueKeys = new Queue<LinButton.KeyButton>();
         foreach (LinButton button in buttons) queueKeys.Enqueue(button.key);
 
@@ -73,6 +75,7 @@ public class LinearButtons : MonoBehaviour
 
             GameObject button = Instantiate(buttonPrefab, pos, rot, instParent);
             anims[i] = button.GetComponent<Animator>();
+            anims[i].SetFloat("MultiPassage", buttons[i].speedPassage);
 
             Sprite spriteButton;
             switch(buttons[i].key)
@@ -128,115 +131,67 @@ public class LinearButtons : MonoBehaviour
                 IEnumerator PassageButtons()
                 {
                     anims[0].SetBool("Passage", true);
+                    anims[0].SetTrigger("Pressed");
 
                     for (int i = 1; i < anims.Length; i++)
                     {
-                        yield return new WaitForSeconds(0.6f / buttons[i].timePassage);
+                        yield return new WaitForSeconds(buttons[i].waitPassage / buttons[i].speedPassage);
                         anims[i].SetBool("Passage", true);
+
+                        if (i == anims.Length - 1)
+                        {
+                            yield return new WaitForSeconds(1 / buttons[i].speedPassage); // Где 1 - это время анимации Passage
+                            if (queueKeys.Count != 0)
+                            {
+                                FinishPazzle(false);
+                            }
+                        }
                     }
                 }
             }
             return;
         }
 
-        if (key == queueKeys.Peek())
+        if (key == queueKeys.Peek() && anims[anims.Length - queueKeys.Count].GetBool("Passage") == true)
         {
             queueKeys.Dequeue();
             anims[anims.Length - queueKeys.Count - 1].SetTrigger("Pressed");
 
             if (queueKeys.Count == 0)
             {
-                GetComponent<Animator>().SetTrigger("Hide");
-                GetComponent<PazzleController>().InvokePassedAction();
-                passed = true;
+                FinishPazzle(true);
             }
         }
         else
         {
-            // Fail!
-            Debug.Log("Fail");
-            // GetComponent<Animator>().SetTrigger("Hide");
-            // GetComponent<PazzleController>().InvokeFailedAction();
-            passed = true;
+            FinishPazzle(false);
+        }
+    }
+
+    private void FinishPazzle(bool pass)
+    {
+        if (passed) return;
+        passed = true;
+
+        if (pass)
+        {
+            GetComponent<PazzleController>().InvokePassedAction();
+            GetComponent<Animator>().SetTrigger("Hide");
+        }
+        else
+        {
+            StartCoroutine(UnPassageButtons());
+            IEnumerator UnPassageButtons()
+            {
+                for (int i = anims.Length - 1; i >= anims.Length - queueKeys.Count - 1; i--)
+                {
+                    anims[i].SetTrigger("UnPassage");
+                }
+
+                yield return new WaitForSeconds(1f);
+                GetComponent<PazzleController>().InvokeFailedAction();
+                GetComponent<Animator>().SetTrigger("Hide");
+            }
         }
     }
 }
-
-
-// public class LinearButtons : MonoBehaviour
-// {
-//     public Animator[] buttonsYHB;
-//     [SerializeField] private float speedPress;
-
-//     private enum StartButton { Y, H, B }
-//     [SerializeField] private StartButton startButton;
-
-//     private bool saveY;
-//     private bool saveH;
-//     private bool saveB;
-
-//     private bool passed;
-
-//     private void Awake()
-//     {
-//         buttonsYHB[0].SetFloat("Speed", speedPress);
-//         buttonsYHB[1].SetFloat("Speed", speedPress);
-//         buttonsYHB[2].SetFloat("Speed", speedPress);
-
-//         if (InputController.Instance != null)
-//         {
-//             // InputController.Instance.controls.Interactions.Pazzle1.performed += context =>
-//             // {
-//             //     if (startY) return;
-//             //     buttonsYHB[0].SetBool("Press", true);
-//             //     startY = true;
-//             // };
-//             // InputController.Instance.controls.Interactions.Pazzle2.performed += context =>
-//             // {
-//             //     if (failH) return;
-//             //     if (buttonsYHB[1].GetComponent<Image>().fillAmount == 0.99f || buttonsYHB[1].GetBool("Press") == false || !startY || saveH)
-//             //     {
-//             //         failH = true;
-//             //         return;
-//             //     }
-//             //     saveH = true;
-//             // };
-//             // InputController.Instance.controls.Interactions.Pazzle3.performed += context =>
-//             // {
-//             //     if (failB) return;
-//             //     if (buttonsYHB[2].GetComponent<Image>().fillAmount == 0.99f || buttonsYHB[2].GetBool("Press") == false || !saveH || saveB)
-//             //     {
-//             //         failB = true;
-//             //         return;
-//             //     }
-//             //     saveB = true;
-//             // };
-//         }
-//     }
-
-//     private void Update()
-//     {
-//         if (buttonsYHB[0].GetComponent<Image>().fillAmount == 0.99f)
-//         {
-//             buttonsYHB[1].SetBool("Press", true);
-//         }
-//         if (buttonsYHB[1].GetComponent<Image>().fillAmount == 0.99f)
-//         {
-//             buttonsYHB[2].SetBool("Press", true);
-//         }
-
-//         if (!passed && buttonsYHB[2].GetComponent<Image>().fillAmount == 0.99f)
-//         {
-//             else
-//             {
-//                 if (!saveY) buttonsYHB[0].SetBool("Unpress", true);
-//                 if (!saveH) buttonsYHB[1].SetBool("Unpress", true);
-//                 if (!saveB) buttonsYHB[2].SetBool("Unpress", true);
-//             }
-//         }
-
-//         if (!passed && (buttonsYHB[0].GetComponent<Image>().fillAmount == 0.98f || buttonsYHB[1].GetComponent<Image>().fillAmount == 0.98f || buttonsYHB[2].GetComponent<Image>().fillAmount == 0.98f))
-//         {
-//         }
-//     }
-// }

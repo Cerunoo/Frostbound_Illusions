@@ -7,7 +7,8 @@ public class LinButton
     public enum KeyButton { Y, H, B }
 
     [Space(5)]
-    public float timePassage = 0.5f;
+    public float waitPassage = 0.4f;
+    public float speedPassage = 1f;
 
     [Space(5)]
     public Pos pos;

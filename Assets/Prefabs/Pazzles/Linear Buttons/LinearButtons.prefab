@@ -152,13 +152,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttons:
   - key: 0
-    timePassage: 1
-    pos: 8
+    waitPassage: 0.4
+    speedPassage: 1
+    pos: 5
   - key: 1
-    timePassage: 1
-    pos: 1
+    waitPassage: 0.4
+    speedPassage: 1
+    pos: 4
   - key: 2
-    timePassage: 1
+    waitPassage: 0.4
+    speedPassage: 1
     pos: 3
   buttonPrefab: {fileID: 1144672664983086229, guid: 9c52fdd3eeae56d48877ec602bff826b, type: 3}
   instParent: {fileID: 7675248241415102283}

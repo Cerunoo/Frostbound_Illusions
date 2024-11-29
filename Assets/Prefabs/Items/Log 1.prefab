@@ -345,8 +345,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   receivedItem: {fileID: 1222834732616808089, guid: 28a35084a1320b24abc89d786b0cf11b, type: 3}
   button: {fileID: 167508990014508676}
-  pazzlePrefab: {fileID: 1756950312021367670, guid: 924918c73687520428b9a18209523822, type: 3}
+  pazzlePrefab: {fileID: 1756950312021367670, guid: 6f177cbbc91083d4bbd015b6f0465ab4, type: 3}
   requiredItemToUnlock: {fileID: 981869404428248759, guid: 1a995197da94253458104d2a19c82273, type: 3}
+  puzzleButtons:
+  - key: 0
+    waitPassage: 0.4
+    speedPassage: 1
+    pos: 5
+  - key: 1
+    waitPassage: 0.4
+    speedPassage: 1
+    pos: 4
+  - key: 2
+    waitPassage: 0.4
+    speedPassage: 1
+    pos: 3
 --- !u!212 &730792884686894468
 SpriteRenderer:
   m_ObjectHideFlags: 0

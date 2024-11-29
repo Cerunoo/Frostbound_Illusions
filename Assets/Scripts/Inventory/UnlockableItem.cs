@@ -8,6 +8,8 @@ public class UnlockableItem : MonoBehaviour
 
     [SerializeField] private GameObject requiredItemToUnlock;
 
+    [SerializeField] private LinButton[] puzzleButtons;
+
     private Inventory inventory;
     private GameObject onlyPazzle;
 
@@ -25,6 +27,8 @@ public class UnlockableItem : MonoBehaviour
             onlyPazzle.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
             onlyPazzle.GetComponent<PazzleController>().passed += ReceiveItem;
             onlyPazzle.GetComponent<PazzleController>().failed += FailedReceive;
+
+            onlyPazzle.GetComponent<LinearButtons>().AwakeManual(puzzleButtons);
         }
         else
         {
