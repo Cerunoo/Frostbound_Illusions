@@ -470,6 +470,56 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Leveled"",
+            ""id"": ""1ba9d210-2227-4b7b-8977-3ac2c0515ed5"",
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""4948ad9d-13c8-4b8f-8466-a90929d9188a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e93110c9-df3a-476e-87b5-6e26dbc9d73d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd2bfa42-756e-48b1-85f3-5e26c3557544"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc78a835-491a-4dd1-99a5-9bdd3124716b"",
+                    ""path"": ""<DualShockGamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -517,6 +567,9 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_NextSentence = m_Dialogue.FindAction("NextSentence", throwIfNotFound: true);
+        // Leveled
+        m_Leveled = asset.FindActionMap("Leveled", throwIfNotFound: true);
+        m_Leveled_Escape = m_Leveled.FindAction("Escape", throwIfNotFound: true);
     }
 
     ~@InputSettings()
@@ -525,6 +578,7 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Inventory.enabled, "This will cause a leak and performance issues, InputSettings.Inventory.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Interactions.enabled, "This will cause a leak and performance issues, InputSettings.Interactions.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Dialogue.enabled, "This will cause a leak and performance issues, InputSettings.Dialogue.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Leveled.enabled, "This will cause a leak and performance issues, InputSettings.Leveled.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -830,6 +884,52 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
         }
     }
     public DialogueActions @Dialogue => new DialogueActions(this);
+
+    // Leveled
+    private readonly InputActionMap m_Leveled;
+    private List<ILeveledActions> m_LeveledActionsCallbackInterfaces = new List<ILeveledActions>();
+    private readonly InputAction m_Leveled_Escape;
+    public struct LeveledActions
+    {
+        private @InputSettings m_Wrapper;
+        public LeveledActions(@InputSettings wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_Leveled_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_Leveled; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LeveledActions set) { return set.Get(); }
+        public void AddCallbacks(ILeveledActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LeveledActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LeveledActionsCallbackInterfaces.Add(instance);
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+        }
+
+        private void UnregisterCallbacks(ILeveledActions instance)
+        {
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+        }
+
+        public void RemoveCallbacks(ILeveledActions instance)
+        {
+            if (m_Wrapper.m_LeveledActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILeveledActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LeveledActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LeveledActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LeveledActions @Leveled => new LeveledActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -871,5 +971,9 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
     public interface IDialogueActions
     {
         void OnNextSentence(InputAction.CallbackContext context);
+    }
+    public interface ILeveledActions
+    {
+        void OnEscape(InputAction.CallbackContext context);
     }
 }
