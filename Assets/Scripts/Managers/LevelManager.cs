@@ -26,7 +26,8 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator Wait(int index) // Искусственное ожидание загрузки сцены, временно
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         AsyncLoading.LoadScene(index);
+        Time.timeScale = 1;
     }
 }

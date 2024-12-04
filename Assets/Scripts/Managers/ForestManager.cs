@@ -29,7 +29,7 @@ public class ForestManager : MonoBehaviour
 
     private IEnumerator Wait() // Искусственное ожидание загрузки сцены, временно
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         AsyncLoading.LoadScene(indexHouseScene);
     }
 }
