@@ -35,7 +35,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(TextAsset dialog, DialogueNPC npc)
     {
-        if (InputController.Instance != null) InputController.Instance.controls.Dialogue.NextSentence.performed += InputNextSentence;
+        // Инструкция вызывается из WaitShowBox 
+        // if (InputController.Instance != null) InputController.Instance.controls.Dialogue.NextSentence.performed += InputNextSentence;
 
         Dialogue dialogue = JsonUtility.FromJson<Dialogue>(dialog.ToString());
         currentNPC = npc;
@@ -51,7 +52,13 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-        // DisplayNextSentence(); // Функция вызывается из ключа события в анимации Show
+        // DisplayNextSentence(); // Инструкция вызывается из WaitShowBox 
+    }
+
+    public void WaitShowBox() // Функция вызывается из ключа события в анимации Show
+    {
+        if (InputController.Instance != null) InputController.Instance.controls.Dialogue.NextSentence.performed += InputNextSentence;
+        DisplayNextSentence();
     }
 
     public void DisplayNextSentence()

@@ -227,4 +227,9 @@ public class Inventory : MonoBehaviour
             // anim.SetBool("hide", false);
         }
     }
+
+    public bool GetStateWork()
+    {
+        return isWork;
+    }
 }

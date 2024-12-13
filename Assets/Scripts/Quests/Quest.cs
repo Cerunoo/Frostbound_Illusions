@@ -33,6 +33,7 @@ public class Quest : MonoBehaviour
         if (questGot) return;
         questGot = true;
         QuestGotEvent?.Invoke(this);
+
         if (disableWallNPC == DisableWallNPC.AfterGot) GetComponent<Collider2D>().enabled = false;
         foreach (IncludeObjectsController item in includeObjectsControllers) item.TryInclude(IncludeObjectsController.IncludeObjectsAfter.AfterGot);
         if (executeEventsAfter == ExecuteEventsAfter.AfterGot) m_ExecuteEvents?.Invoke();
@@ -43,6 +44,7 @@ public class Quest : MonoBehaviour
         if (questPass) return;
         questPass = true;
         QuestPassedEvent?.Invoke(this);
+        
         if (disableWallNPC == DisableWallNPC.AfterPass) GetComponent<Collider2D>().enabled = false;
         foreach (IncludeObjectsController item in includeObjectsControllers) item.TryInclude(IncludeObjectsController.IncludeObjectsAfter.AfterPass);
         if (executeEventsAfter == ExecuteEventsAfter.AfterPass) m_ExecuteEvents?.Invoke();

@@ -144,6 +144,9 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private float _timeJumpWasPressed;
     private bool doubleJump;
 
+    private bool jumpDelay;
+    private Coroutine startJumpDelay;
+
     private bool HasBufferedJump => _bufferedJumpUsable && _time < _timeJumpWasPressed + _stats.JumpBuffer;
     private bool CanUseCoyote => _coyoteUsable && !_grounded && _time < _frameLeftGrounded + _stats.CoyoteTime;
 
@@ -159,9 +162,22 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
         if (!_jumpToConsume && !HasBufferedJump) return;
 
-        if (_grounded || CanUseCoyote && !isDashing) ExecuteJump();
+        if ((_grounded || CanUseCoyote && !isDashing) && !jumpDelay)
+        {
+            if (startJumpDelay != null) StopCoroutine(startJumpDelay);
+            startJumpDelay = StartCoroutine(StartJumpDelay());
+            ExecuteJump();
+        }
 
         _jumpToConsume = false;
+    }
+
+    private IEnumerator StartJumpDelay()
+    {
+        jumpDelay = true;
+
+        yield return new WaitForSeconds(_stats.JumpDelay);
+        jumpDelay = false;
     }
 
     private void ExecuteJump(bool doubleJump = false)

@@ -59,6 +59,9 @@ public class ScriptableStats : ScriptableObject
     [Tooltip("The immediate velocity applied when jumping")]
     public float JumpPower = 36;
 
+    [Tooltip("JumpDelay")]
+    public float JumpDelay = 0.5f;
+
     [Tooltip("The immediate velocity applied when double jumping")]
     public float DoubleJumpPower = 30;
 
