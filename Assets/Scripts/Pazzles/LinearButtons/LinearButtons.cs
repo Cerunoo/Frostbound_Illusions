@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,6 +19,11 @@ public class LinearButtons : MonoBehaviour
     private bool qteStarted;
 
     private bool passed;
+
+    private void Awake()
+    {
+        InputController.DisableInput(InputController.Instance.controls.Inventory.SwitchOpen);
+    }
 
     public void AwakeManual(LinButton[] buttonsInput)
     {
@@ -177,6 +183,7 @@ public class LinearButtons : MonoBehaviour
         {
             GetComponent<PazzleController>().InvokePassedAction();
             GetComponent<Animator>().SetTrigger("Hide");
+            InputController.EnableInput(InputController.Instance.controls.Inventory.SwitchOpen);
         }
         else
         {
@@ -191,6 +198,7 @@ public class LinearButtons : MonoBehaviour
                 yield return new WaitForSeconds(1f);
                 GetComponent<PazzleController>().InvokeFailedAction();
                 GetComponent<Animator>().SetTrigger("Hide");
+                InputController.EnableInput(InputController.Instance.controls.Inventory.SwitchOpen);
             }
         }
     }

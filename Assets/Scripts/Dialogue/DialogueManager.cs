@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -43,6 +43,8 @@ public class DialogueManager : MonoBehaviour
 
         boxAnim.SetBool("show", true);
         player.disableMove = true;
+        InputController.DisableAllInput();
+        InputController.EnableInput(InputController.Instance.controls.Dialogue.NextSentence);
 
         nameText.text = dialogue.name;
         dialogueText.text = "";
@@ -105,5 +107,6 @@ public class DialogueManager : MonoBehaviour
 
         boxAnim.SetBool("show", false);
         player.disableMove = false;
+        InputController.EnableAllInput();
     }
 }

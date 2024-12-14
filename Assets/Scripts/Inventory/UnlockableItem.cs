@@ -5,6 +5,7 @@ public class UnlockableItem : MonoBehaviour
     [SerializeField] private Item receivedItem;
     [SerializeField] private InteractionButton button;
     public GameObject pazzlePrefab;
+    [SerializeField] private Transform parentSpawn;
 
     [SerializeField] private GameObject requiredItemToUnlock;
 
@@ -23,7 +24,7 @@ public class UnlockableItem : MonoBehaviour
     {
         if (inventory.CanPickupItem() && inventory.CheckItem(requiredItemToUnlock))
         {
-            onlyPazzle = Instantiate(pazzlePrefab, Vector2.zero, Quaternion.identity, FindFirstObjectByType<Canvas>().transform);
+            onlyPazzle = Instantiate(pazzlePrefab, Vector2.zero, Quaternion.identity, parentSpawn);
             onlyPazzle.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
             onlyPazzle.GetComponent<PazzleController>().passed += ReceiveItem;
             onlyPazzle.GetComponent<PazzleController>().failed += FailedReceive;

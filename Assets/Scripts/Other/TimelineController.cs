@@ -28,6 +28,16 @@ public class TimelineController : MonoBehaviour
         DisableInteractions(false);
     }
 
+    public void PlayAsset(PlayableAsset asset)
+    {
+        director.Play(asset);
+    }
+
+    public void PlayAsset(PlayableAsset asset, DirectorWrapMode mode)
+    {
+        director.Play(asset, mode);
+    }
+
     private bool inventoryStateWorkPastValue;
     private void DisableInteractions(bool disable)
     {
@@ -48,15 +58,17 @@ public class TimelineController : MonoBehaviour
         InteractionButton[] buttons = FindObjectsByType<InteractionButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         if (disable) Array.ForEach(buttons, InteractionButton.StaticDisable);
         else if (!disable) Array.ForEach(buttons, InteractionButton.StaticEnable);
+
+        if (disable)
+        {
+            InputController.DisableAllInput();
+            InputController.EnableInput(InputController.Instance.controls.Player.Horizontal);
+        }
+        if (!disable) InputController.EnableAllInput();
     }
 
-    public void PlayAsset(PlayableAsset asset)
+    public static void StaticDisableInteractions(bool disable)
     {
-        director.Play(asset);
-    }
-
-    public void PlayAsset(PlayableAsset asset, DirectorWrapMode mode)
-    {
-        director.Play(asset, mode);
+        if (Instance != null) Instance.DisableInteractions(disable);
     }
 }

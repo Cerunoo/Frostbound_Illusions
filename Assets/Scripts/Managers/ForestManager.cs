@@ -12,11 +12,13 @@ public class ForestManager : MonoBehaviour
     {
         homeButton.btnPress += LoadHouseScene;
         logQuest.QuestGotEvent += GetBP;
+        InputController.DisableInput(InputController.Instance.controls.Inventory.SwitchOpen);
     }
 
     private void GetBP(Quest quest)
     {
         if (Inventory.Instance != null) Inventory.Instance.GetComponent<Animator>().SetBool("hide", false);
+        InputController.EnableInput(InputController.Instance.controls.Inventory.SwitchOpen);
         logQuest.GetComponent<Animator>().SetBool("GetBP", true);
     }
 

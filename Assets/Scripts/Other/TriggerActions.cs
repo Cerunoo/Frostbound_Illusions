@@ -6,11 +6,18 @@ public class TriggerActions : MonoBehaviour
     [SerializeField, Space(3)] private UnityEvent m_ExecuteEvents = new UnityEvent();
     private bool triggered;
 
-    private void OnTriggerEnter2D()
-    {
-        if (triggered) return;
-        triggered = true;
+    [SerializeField] private bool destroyAfterTrigger;
 
-        m_ExecuteEvents?.Invoke();
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            if (triggered) return;
+            triggered = true;
+
+            m_ExecuteEvents?.Invoke();
+
+            if (destroyAfterTrigger) Destroy(gameObject);
+        }
     }
 }

@@ -450,6 +450,76 @@
             ]
         },
         {
+            "name": "PageStranger",
+            "id": "bafe0166-09f6-4c2c-a548-67b070f67559",
+            "actions": [
+                {
+                    "name": "SwitchOpen",
+                    "type": "Button",
+                    "id": "1eefb131-6de3-433a-b4d4-75655f597442",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TurnPaper",
+                    "type": "Button",
+                    "id": "ba06bef3-a148-4485-a65e-0ef9ec7d7fb0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6199ae98-8306-4dab-a2a0-ae8d97861fbc",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchOpen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab921bb1-5fca-4332-8784-e63cc970bf1f",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "TurnPaper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d1673fb-c622-4bf1-99a0-896b856d3308",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "TurnPaper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0bd5787-a83c-474a-b051-0605e5f87b6b",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchOpen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Leveled",
             "id": "1ba9d210-2227-4b7b-8977-3ac2c0515ed5",
             "actions": [

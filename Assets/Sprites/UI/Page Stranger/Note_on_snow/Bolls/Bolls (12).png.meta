@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: fa657f201d6ebbe4aba32295a0a26412
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3941422534344143480
+    second: Bolls (12)_0
+  - first:
+      213: 3587163238438665322
+    second: Bolls (12)_1
+  - first:
+      213: 1422244081867773322
+    second: Bolls (12)_2
+  - first:
+      213: -8510354966427797373
+    second: Bolls (12)_3
+  - first:
+      213: 2855607251171172370
+    second: Bolls (12)_4
+  - first:
+      213: -6059081204987807093
+    second: Bolls (12)_5
+  - first:
+      213: -1570082913726054337
+    second: Bolls (12)_6
+  - first:
+      213: 2810927836007944406
+    second: Bolls (12)_7
+  - first:
+      213: -5362666722778227725
+    second: Bolls (12)_8
+  - first:
+      213: -8815112119404975470
+    second: Bolls (12)_9
+  - first:
+      213: -8473515110581829159
+    second: Bolls (12)_10
+  - first:
+      213: -8838044400864874031
+    second: Bolls (12)_11
+  - first:
+      213: 6024301540775840849
+    second: Bolls (12)_12
+  - first:
+      213: -1729068403071495878
+    second: Bolls (12)_13
+  - first:
+      213: 8813916377064294381
+    second: Bolls (12)_14
+  - first:
+      213: -9125630477982984811
+    second: Bolls (12)_15
+  - first:
+      213: 2072852382958363243
+    second: Bolls (12)_16
+  - first:
+      213: 3260959708659082123
+    second: Bolls (12)_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 12
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bolls (12)_0
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 1357
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88d82ba66114d49c0800000000000000
+      internalID: -3941422534344143480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_1
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 1266
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6cf972b5f928c130800000000000000
+      internalID: 3587163238438665322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_2
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 1230
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8551a30573dcb310800000000000000
+      internalID: 1422244081867773322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_3
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 1227
+        width: 28
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 388f6917f3525e980800000000000000
+      internalID: -8510354966427797373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_4
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 1007
+        width: 187
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21066105aa721a720800000000000000
+      internalID: 2855607251171172370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_5
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 1170
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8ab4771fb1d9eba0800000000000000
+      internalID: -6059081204987807093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_6
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 1165
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f30c27b98e1f53ae0800000000000000
+      internalID: -1570082913726054337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_7
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 1088
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d0d28259fb620720800000000000000
+      internalID: 2810927836007944406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_8
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 1088
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fbdefb370bf395b0800000000000000
+      internalID: -5362666722778227725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_9
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 898
+        width: 218
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29a20ab5b3e6aa580800000000000000
+      internalID: -8815112119404975470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_10
+      rect:
+        serializedVersion: 2
+        x: 1327
+        y: 1115
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d18ddac6e6086a80800000000000000
+      internalID: -8473515110581829159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_11
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 1087
+        width: 68
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d1b1518175f85580800000000000000
+      internalID: -8838044400864874031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_12
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 1115
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15c48cd455e9a9350800000000000000
+      internalID: 6024301540775840849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_13
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 1064
+        width: 12
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a31529ac27d1108e0800000000000000
+      internalID: -1729068403071495878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_14
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 1070
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de74aee2f32515a70800000000000000
+      internalID: 8813916377064294381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_15
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 959
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59598501e6f3b5180800000000000000
+      internalID: -9125630477982984811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_16
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 948
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b622e06824044cc10800000000000000
+      internalID: 2072852382958363243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolls (12)_17
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 695
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b836c75e391414d20800000000000000
+      internalID: 3260959708659082123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bolls (12)_0: -3941422534344143480
+      Bolls (12)_1: 3587163238438665322
+      Bolls (12)_10: -8473515110581829159
+      Bolls (12)_11: -8838044400864874031
+      Bolls (12)_12: 6024301540775840849
+      Bolls (12)_13: -1729068403071495878
+      Bolls (12)_14: 8813916377064294381
+      Bolls (12)_15: -9125630477982984811
+      Bolls (12)_16: 2072852382958363243
+      Bolls (12)_17: 3260959708659082123
+      Bolls (12)_2: 1422244081867773322
+      Bolls (12)_3: -8510354966427797373
+      Bolls (12)_4: 2855607251171172370
+      Bolls (12)_5: -6059081204987807093
+      Bolls (12)_6: -1570082913726054337
+      Bolls (12)_7: 2810927836007944406
+      Bolls (12)_8: -5362666722778227725
+      Bolls (12)_9: -8815112119404975470
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

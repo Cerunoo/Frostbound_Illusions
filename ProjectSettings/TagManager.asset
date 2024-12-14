@@ -44,6 +44,9 @@ TagManager:
   - name: Lower Background
     uniqueID: 1932857249
     locked: 0
+  - name: Player
+    uniqueID: 3349982993
+    locked: 0
   - name: Characters
     uniqueID: 3235866953
     locked: 0

@@ -472,6 +472,76 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
             ]
         },
         {
+            ""name"": ""PageStranger"",
+            ""id"": ""bafe0166-09f6-4c2c-a548-67b070f67559"",
+            ""actions"": [
+                {
+                    ""name"": ""SwitchOpen"",
+                    ""type"": ""Button"",
+                    ""id"": ""1eefb131-6de3-433a-b4d4-75655f597442"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TurnPaper"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba06bef3-a148-4485-a65e-0ef9ec7d7fb0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6199ae98-8306-4dab-a2a0-ae8d97861fbc"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchOpen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab921bb1-5fca-4332-8784-e63cc970bf1f"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TurnPaper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d1673fb-c622-4bf1-99a0-896b856d3308"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""TurnPaper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0bd5787-a83c-474a-b051-0605e5f87b6b"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchOpen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""Leveled"",
             ""id"": ""1ba9d210-2227-4b7b-8977-3ac2c0515ed5"",
             ""actions"": [
@@ -567,6 +637,10 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_NextSentence = m_Dialogue.FindAction("NextSentence", throwIfNotFound: true);
+        // PageStranger
+        m_PageStranger = asset.FindActionMap("PageStranger", throwIfNotFound: true);
+        m_PageStranger_SwitchOpen = m_PageStranger.FindAction("SwitchOpen", throwIfNotFound: true);
+        m_PageStranger_TurnPaper = m_PageStranger.FindAction("TurnPaper", throwIfNotFound: true);
         // Leveled
         m_Leveled = asset.FindActionMap("Leveled", throwIfNotFound: true);
         m_Leveled_Escape = m_Leveled.FindAction("Escape", throwIfNotFound: true);
@@ -578,6 +652,7 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Inventory.enabled, "This will cause a leak and performance issues, InputSettings.Inventory.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Interactions.enabled, "This will cause a leak and performance issues, InputSettings.Interactions.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Dialogue.enabled, "This will cause a leak and performance issues, InputSettings.Dialogue.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PageStranger.enabled, "This will cause a leak and performance issues, InputSettings.PageStranger.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Leveled.enabled, "This will cause a leak and performance issues, InputSettings.Leveled.Disable() has not been called.");
     }
 
@@ -885,6 +960,60 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
     }
     public DialogueActions @Dialogue => new DialogueActions(this);
 
+    // PageStranger
+    private readonly InputActionMap m_PageStranger;
+    private List<IPageStrangerActions> m_PageStrangerActionsCallbackInterfaces = new List<IPageStrangerActions>();
+    private readonly InputAction m_PageStranger_SwitchOpen;
+    private readonly InputAction m_PageStranger_TurnPaper;
+    public struct PageStrangerActions
+    {
+        private @InputSettings m_Wrapper;
+        public PageStrangerActions(@InputSettings wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SwitchOpen => m_Wrapper.m_PageStranger_SwitchOpen;
+        public InputAction @TurnPaper => m_Wrapper.m_PageStranger_TurnPaper;
+        public InputActionMap Get() { return m_Wrapper.m_PageStranger; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PageStrangerActions set) { return set.Get(); }
+        public void AddCallbacks(IPageStrangerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PageStrangerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PageStrangerActionsCallbackInterfaces.Add(instance);
+            @SwitchOpen.started += instance.OnSwitchOpen;
+            @SwitchOpen.performed += instance.OnSwitchOpen;
+            @SwitchOpen.canceled += instance.OnSwitchOpen;
+            @TurnPaper.started += instance.OnTurnPaper;
+            @TurnPaper.performed += instance.OnTurnPaper;
+            @TurnPaper.canceled += instance.OnTurnPaper;
+        }
+
+        private void UnregisterCallbacks(IPageStrangerActions instance)
+        {
+            @SwitchOpen.started -= instance.OnSwitchOpen;
+            @SwitchOpen.performed -= instance.OnSwitchOpen;
+            @SwitchOpen.canceled -= instance.OnSwitchOpen;
+            @TurnPaper.started -= instance.OnTurnPaper;
+            @TurnPaper.performed -= instance.OnTurnPaper;
+            @TurnPaper.canceled -= instance.OnTurnPaper;
+        }
+
+        public void RemoveCallbacks(IPageStrangerActions instance)
+        {
+            if (m_Wrapper.m_PageStrangerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPageStrangerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PageStrangerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PageStrangerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PageStrangerActions @PageStranger => new PageStrangerActions(this);
+
     // Leveled
     private readonly InputActionMap m_Leveled;
     private List<ILeveledActions> m_LeveledActionsCallbackInterfaces = new List<ILeveledActions>();
@@ -971,6 +1100,11 @@ public partial class @InputSettings: IInputActionCollection2, IDisposable
     public interface IDialogueActions
     {
         void OnNextSentence(InputAction.CallbackContext context);
+    }
+    public interface IPageStrangerActions
+    {
+        void OnSwitchOpen(InputAction.CallbackContext context);
+        void OnTurnPaper(InputAction.CallbackContext context);
     }
     public interface ILeveledActions
     {
