@@ -47,7 +47,7 @@ SortingGroup:
   m_GameObject: {fileID: 167508989714256223}
   m_Enabled: 1
   m_SortingLayerID: 610465205
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!23 &167508989714256208
@@ -73,7 +73,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -5160498532102205203, guid: 9781f741c1d053f43bcc3a239f225992, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,8 +117,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0420\u0443\u0431\u0438\u0442\u044C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9781f741c1d053f43bcc3a239f225992, type: 2}
+  m_sharedMaterial: {fileID: -5160498532102205203, guid: 9781f741c1d053f43bcc3a239f225992, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -346,6 +346,7 @@ MonoBehaviour:
   receivedItem: {fileID: 1222834732616808089, guid: 28a35084a1320b24abc89d786b0cf11b, type: 3}
   button: {fileID: 167508990014508676}
   pazzlePrefab: {fileID: 1756950312021367670, guid: 6f177cbbc91083d4bbd015b6f0465ab4, type: 3}
+  parentSpawn: {fileID: 0}
   requiredItemToUnlock: {fileID: 981869404428248759, guid: 1a995197da94253458104d2a19c82273, type: 3}
   puzzleButtons:
   - key: 0

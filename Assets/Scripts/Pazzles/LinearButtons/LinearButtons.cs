@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -100,6 +99,9 @@ public class LinearButtons : MonoBehaviour
                     break;
             }
             button.GetComponent<Image>().sprite = spriteButton;
+
+            RectTransform rect = button.GetComponent<RectTransform>();
+            rect.localPosition = new Vector3(rect.localPosition.x, rect.localPosition.y, 0);
         }
     }
 
