@@ -1,5 +1,5 @@
 using UnityEngine;
-// using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class DaydreamsManager : MonoBehaviour
 {
@@ -7,7 +7,7 @@ public class DaydreamsManager : MonoBehaviour
     {
         if (PlayerController.Instance?.FrameDirection.y <= -35f)
         {
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

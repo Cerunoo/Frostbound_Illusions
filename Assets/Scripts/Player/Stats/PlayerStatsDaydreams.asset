@@ -63,7 +63,7 @@ MonoBehaviour:
   DashTime: 0.13
   DashDelay: 0.65
   JumpPower: 14
-  JumpDelay: 0.75
+  JumpDelay: 0.2
   DoubleJumpPower: 12
   MaxFallSpeed: 35
   FallAcceleration: 40
