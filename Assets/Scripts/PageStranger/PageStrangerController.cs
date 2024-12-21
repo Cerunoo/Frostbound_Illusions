@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
-using Unity.Burst.CompilerServices;
 
 public class PageStrangerController : MonoBehaviour
 {
@@ -26,7 +25,7 @@ public class PageStrangerController : MonoBehaviour
         if (InputController.Instance != null) InputController.Instance.controls.PageStranger.SwitchOpen.performed += SwitchOpen;
         panelAnim = GetComponent<Animator>();
 
-        unlockPage = false; // В будущем возможное считывание с PlayerPrefs
+        // unlockPage = false; // В будущем возможное считывание с PlayerPrefs
         if (unlockPage == false)
         {
             InputController.DisableInput(InputController.Instance.controls.PageStranger.SwitchOpen);

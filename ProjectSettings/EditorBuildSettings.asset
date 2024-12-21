@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Daydreams.unity
     guid: 1eb8cb39a3a92fe41a8a54e084ed9362
+  - enabled: 1
+    path: Assets/Scenes/Forest2.unity
+    guid: 784b247a5ee5b2c48a25d097b595782f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class RunPlatform : MonoBehaviour
 {
+    private bool runPastValue;
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            if (PlayerController.Instance != null) PlayerController.Instance.isRunning = true;
+            runPastValue = PlayerController.Instance.isRunning;
+            PlayerController.Instance.isRunning = true;
         }
     }
     
@@ -14,7 +16,7 @@ public class RunPlatform : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (PlayerController.Instance != null) PlayerController.Instance.isRunning = false;
+            PlayerController.Instance.isRunning = runPastValue;
         }
     }
 }

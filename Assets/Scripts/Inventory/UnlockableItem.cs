@@ -22,19 +22,25 @@ public class UnlockableItem : MonoBehaviour
 
     private void TryReceiveItem()
     {
-        if (inventory.CanPickupItem() && inventory.CheckItem(requiredItemToUnlock))
+        if (!inventory.CanPickupItem())
         {
-            onlyPazzle = Instantiate(pazzlePrefab, Vector2.zero, Quaternion.identity, parentSpawn);
-            onlyPazzle.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
-            onlyPazzle.GetComponent<PazzleController>().passed += ReceiveItem;
-            onlyPazzle.GetComponent<PazzleController>().failed += FailedReceive;
-
-            onlyPazzle.GetComponent<LinearButtons>().AwakeManual(puzzleButtons);
-        }
-        else
-        {
+            NoticeHintController.Instance.ShowMessage("Недостаточно места..");
             button.pressed = false;
+            return;
         }
+        if (!inventory.CheckItem(requiredItemToUnlock))
+        {
+            NoticeHintController.Instance.ShowMessage("Необходим топор..");
+            button.pressed = false;
+            return;
+        }
+
+        onlyPazzle = Instantiate(pazzlePrefab, Vector2.zero, Quaternion.identity, parentSpawn);
+        onlyPazzle.GetComponent<RectTransform>().localPosition = new Vector2(0, 0);
+        onlyPazzle.GetComponent<PazzleController>().passed += ReceiveItem;
+        onlyPazzle.GetComponent<PazzleController>().failed += FailedReceive;
+
+        onlyPazzle.GetComponent<LinearButtons>().AwakeManual(puzzleButtons);
     }
 
     private void ReceiveItem()
