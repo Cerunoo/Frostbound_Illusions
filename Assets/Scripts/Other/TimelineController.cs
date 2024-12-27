@@ -6,6 +6,8 @@ public class TimelineController : MonoBehaviour
 {
     public static TimelineController Instance { get; private set; }
 
+    public bool isPlay { get; private set; }
+    
     private PlayableDirector director;
 
     private void Awake()
@@ -21,11 +23,13 @@ public class TimelineController : MonoBehaviour
     private void OnPlayed(PlayableDirector director = null)
     {
         DisableInteractions(true);
+        isPlay = true;
     }
 
     private void OnStopped(PlayableDirector director)
     {
         DisableInteractions(false);
+        isPlay = false;
     }
 
     public void PlayAsset(PlayableAsset asset)

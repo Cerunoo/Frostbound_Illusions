@@ -29,11 +29,15 @@ public class PlayerSound : MonoBehaviour
 
     private void OnJumped(bool doubleJump)
     {
+        if (TimelineController.Instance.isPlay) return;
+
         source.PlayOneShot(jumpSound);
     }
 
     private void OnGroundedChanged(bool grounded, float impact)
     {
+        if (TimelineController.Instance.isPlay) return;
+
         if (grounded)
         {
             source.PlayOneShot(landingSound);
