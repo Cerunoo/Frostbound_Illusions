@@ -14,6 +14,9 @@ public class UnlockableItem : MonoBehaviour
     private Inventory inventory;
     private GameObject onlyPazzle;
 
+    [Header("Debug")]
+    [SerializeField] private bool withoutUnlock;
+
     private void Start()
     {
         if (Inventory.Instance == null) return; 
@@ -40,7 +43,7 @@ public class UnlockableItem : MonoBehaviour
         onlyPazzle.GetComponent<PazzleController>().passed += ReceiveItem;
         onlyPazzle.GetComponent<PazzleController>().failed += FailedReceive;
 
-        onlyPazzle.GetComponent<LinearButtons>().AwakeManual(puzzleButtons);
+        onlyPazzle.GetComponent<LinearButtons>().AwakeManual(puzzleButtons, withoutUnlock);
     }
 
     private void ReceiveItem()

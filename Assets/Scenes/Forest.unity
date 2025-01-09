@@ -303,6 +303,10 @@ PrefabInstance:
       propertyPath: pazzlePrefab
       value: 
       objectReference: {fileID: 1756950312021367670, guid: 6f177cbbc91083d4bbd015b6f0465ab4, type: 3}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: withoutUnlock
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2908810144543085308, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -22363,6 +22367,62 @@ PrefabInstance:
       propertyPath: pazzlePrefab
       value: 
       objectReference: {fileID: 1756950312021367670, guid: 6f177cbbc91083d4bbd015b6f0465ab4, type: 3}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: withoutUnlock
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[3].key
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[3].pos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[4].key
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[4].pos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[5].key
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[5].pos
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[3].waitPassage
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[4].waitPassage
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[5].waitPassage
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[3].speedPassage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[4].speedPassage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[5].speedPassage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2908810144543085308, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -38203,6 +38263,22 @@ PrefabInstance:
       propertyPath: pazzlePrefab
       value: 
       objectReference: {fileID: 1756950312021367670, guid: 6f177cbbc91083d4bbd015b6f0465ab4, type: 3}
+    - target: {fileID: 730792884686894584, guid: cc8b6b69f7501da4d908ffcc5c723b70, type: 3}
+      propertyPath: withoutUnlock
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 730792884686894584, guid: cc8b6b69f7501da4d908ffcc5c723b70, type: 3}
+      propertyPath: puzzleButtons.Array.data[1].waitPassage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 730792884686894584, guid: cc8b6b69f7501da4d908ffcc5c723b70, type: 3}
+      propertyPath: puzzleButtons.Array.data[2].waitPassage
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 730792884686894584, guid: cc8b6b69f7501da4d908ffcc5c723b70, type: 3}
+      propertyPath: puzzleButtons.Array.data[2].speedPassage
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48366,6 +48442,30 @@ PrefabInstance:
       propertyPath: pazzlePrefab
       value: 
       objectReference: {fileID: 1756950312021367670, guid: 6f177cbbc91083d4bbd015b6f0465ab4, type: 3}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: withoutUnlock
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[3].key
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[3].pos
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[3].waitPassage
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908810144543085187, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
+      propertyPath: puzzleButtons.Array.data[3].speedPassage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2908810144543085308, guid: 290e9ec7adb9ec345bfb393e8e02eda7, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -86584,6 +86684,10 @@ PrefabInstance:
       propertyPath: pazzlePrefab
       value: 
       objectReference: {fileID: 1756950312021367670, guid: 6f177cbbc91083d4bbd015b6f0465ab4, type: 3}
+    - target: {fileID: 730792884686894584, guid: cc8b6b69f7501da4d908ffcc5c723b70, type: 3}
+      propertyPath: withoutUnlock
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

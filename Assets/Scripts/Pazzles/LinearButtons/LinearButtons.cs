@@ -18,15 +18,17 @@ public class LinearButtons : MonoBehaviour
     private bool qteStarted;
 
     private bool passed;
+    private bool withoutUnlock;
 
     private void Awake()
     {
         InputController.DisableInput(InputController.Instance.controls.Inventory.SwitchOpen);
     }
 
-    public void AwakeManual(LinButton[] buttonsInput)
+    public void AwakeManual(LinButton[] buttonsInput, bool dontUnlock = false)
     {
         buttons = buttonsInput;
+        withoutUnlock = dontUnlock;
 
         queueKeys = new Queue<LinButton.KeyButton>();
         foreach (LinButton button in buttons) queueKeys.Enqueue(button.key);
@@ -183,6 +185,14 @@ public class LinearButtons : MonoBehaviour
 
         if (pass)
         {
+            if (withoutUnlock)
+            {
+                GetComponent<PazzleController>().InvokeFailedAction();
+                GetComponent<Animator>().SetTrigger("Hide");
+                InputController.EnableInput(InputController.Instance.controls.Inventory.SwitchOpen);
+                return;
+            }
+
             GetComponent<PazzleController>().InvokePassedAction();
             GetComponent<Animator>().SetTrigger("Hide");
             InputController.EnableInput(InputController.Instance.controls.Inventory.SwitchOpen);
