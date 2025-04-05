@@ -361,6 +361,7 @@ MonoBehaviour:
     waitPassage: 0.4
     speedPassage: 1
     pos: 3
+  withoutUnlock: 0
 --- !u!212 &2908810144543085311
 SpriteRenderer:
   m_ObjectHideFlags: 0
